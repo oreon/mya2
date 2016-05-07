@@ -1,0 +1,45 @@
+<div *ngIf="employee">
+  <h2>{{employee.name}} details!</h2>
+  <div>
+    <label>id:={{employee.id}}  {{employee.firstName}}   {{employee.lastName}}</label>
+  </div>
+  <div>
+    <div class="form-group">
+      <label>name: </label>
+      <input type="text" class="form-control" required
+           [(ngModel)]="employee.firstName"
+      >
+
+      <input type="text" class="form-control" required
+           [(ngModel)]="employee.lastName">
+      <ul>
+        <button (click)="addEmployeeSkill()">Add Skill</button>
+        <li *ngFor="#employeeSkill of employee.employeeSkills;#i = index">
+
+          <select class="form-control" required  [ngModel]="employeeSkill?.skill?.id"
+            (ngModelChange)="onEmployeeSkillChanged($event,i)"
+          >
+           <option>Please Select </option>
+            <option *ngFor="#p of skills" [value]="p.id" >{{p.name}}</option>
+          </select>
+          <input [(ngModel)]="employeeSkill.experience" placeholder="experience" />
+          <button (click)="removeEmployeeSkill(i)">Remove</button>
+        </li>
+      </ul>
+
+
+    </div>
+
+
+
+
+  </div>
+
+  <button (click)="save()">Save</button>
+</div>
+
+<!--
+Copyright 2016 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://angular.io/license
+-->
