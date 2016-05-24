@@ -11,7 +11,8 @@ import {RouterActive} from './router-active';
 
 import {LoggedInRouterOutlet} from './LoggedInOutlet';
 
-import {EmployeesComponent} from './employee/employees.component'
+import {CustomersComponent} from './customer/customers.component'
+import {CustomerDetailComponent} from './customer/customer-detail.component'
 
 /*
  * App Component
@@ -21,7 +22,7 @@ import {EmployeesComponent} from './employee/employees.component'
   selector: 'app',
   pipes: [ ],
   providers: [ ],
-  directives: [ RouterActive , LoggedInRouterOutlet ],
+  directives: [  LoggedInRouterOutlet ],
   encapsulation: ViewEncapsulation.None,
   styles: [
     require('normalize.css'),
@@ -77,8 +78,8 @@ import {EmployeesComponent} from './employee/employees.component'
           <button md-button router-active [routerLink]=" ['Login'] ">
             Login
           </button>
-          <button md-button router-active [routerLink]=" ['Employees'] ">
-            Employee
+          <button md-button router-active [routerLink]=" ['Customers'] ">
+            Customer
           </button>
 
 
@@ -101,7 +102,8 @@ import {EmployeesComponent} from './employee/employees.component'
   { path: '/',      name: 'Index', component: Home, useAsDefault: true },
   { path: '/home',  name: 'Home',  component: Home },
   { path: '/login',  name: 'Login',  component: Login },
-  { path: '/employees',  name: 'Employees',  component: EmployeesComponent },
+  { path: '/customers',  name: 'Customers',  component: CustomersComponent },
+  { path: '/customers/:id',  name: 'CustomerDetail',  component: CustomerDetailComponent },
   // Async load a component using Webpack's require with es6-promise-loader and webpack `require`
   { path: '/about', name: 'About', loader: () => require('es6-promise!./about')('About') }
 ])

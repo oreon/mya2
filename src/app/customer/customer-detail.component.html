@@ -1,0 +1,29 @@
+<div *ngIf="customer">
+  <h2>{{customer.lastName}} details!</h2>
+  <div>
+    <label>id:={{customer.id}} </label>
+  </div>
+  <div>
+    <div class="form-group">
+
+      <label>First Name: </label>
+      <input type="text" class="form-control" required
+           [(ngModel)]="customer.firstName"
+      >
+
+      <label>Last Name: </label>
+      <input type="text" class="form-control" required
+           [(ngModel)]="customer.lastName"
+      >
+    </div>
+
+  </div>
+
+  <button (click)="save()">Save</button>
+</div>
+
+<!--
+Copyright 2016 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://angular.io/license
+-->
