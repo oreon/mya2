@@ -8,6 +8,8 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/route
 
 import { CustomerDetailComponent } from './customer-detail.component';
 
+import { BaseListComponent} from '../common/BaseListComponent'
+
 import { CustomerService } from './customer-service';
 
 let template = require('./customers.component.html');
@@ -18,26 +20,14 @@ let template = require('./customers.component.html');
   providers:[CustomerService],
   directives: [CustomerDetailComponent, ROUTER_DIRECTIVES]
 })
-export class CustomersComponent implements OnInit {
+export class CustomersComponent extends BaseListComponent<Customer> implements OnInit {
   customers:Customer[];
   selectedCustomer:Customer;
+  errorMessage:string;
 
   constructor(
   //  private _router: Router,
-  private _customerService:CustomerService) { }
-
-
-  getCustomers() {
-    this._customerService.getCustomers().subscribe(records =>{
-       this.customers = records;
-     }
-     );
-  }
-
-  ngOnInit() {
-    this.getCustomers();
-    console.log(this.customers);
-  }
+  protected _customerService:CustomerService) { super(_customerService); }
 
 
 //  gotoDetail() {this._router.navigate(['CustomerDetail', { id: this.selectedCustomer.id }]);}

@@ -5,69 +5,39 @@ import { SkillService} from '../skill/skill-service';
 //import { SkillType } from './customer';
 
 import { Customer } from './customer';
-
 import { CustomerService } from './customer-service';
 
 import { DBService } from '../common/db-service';
+import { BaseDetailComponent } from '../common/BaseDetailComponent';
 
 
+//import { CustomerOrderDetailComponent} from  './customer-order.component';
 //let template = require('./customer/customer-detail.component.html');
 
 @Component({
   selector: 'customer-detail',
   templateUrl: './app/customer/customer-detail.component.html',
-  providers:[CustomerService, DBService, SkillService],
-//  directives: [CustomerDetailComponent, ROUTER_DIRECTIVES]
+  providers:[CustomerService, DBService, SkillService]
+  //directives: [CustomerOrderDetailComponent]
 })
-export class CustomerDetailComponent implements OnInit {
+export class CustomerDetailComponent  extends BaseDetailComponent<Customer> implements OnInit {
   @Input()
   customer: Customer;
-  errorMessage:String
+  createInstance():Customer { return new Customer()}
+  getSuccessUrl():string { return 'Customers'}
 
   constructor(
-    private _customerService: CustomerService,
-    private _dbService:DBService,
-    private _routeParams: RouteParams,
-     private _router: Router
+    protected _customerService: CustomerService,
+    protected _dbService:DBService,
+    protected _routeParams: RouteParams,
+    protected _router: Router
   ) {
+    super(_customerService, _dbService, _routeParams, _router);
   }
 
-  getCustomer(){
-
-
-  }
 
   ngOnInit() {
-    this.getCustomer();
-        let id = +this._routeParams.get('id');
-
-        if(id == 0 ){
-          this.customer = new Customer();
-          return;
-        }
-
-        this._customerService.getCustomer(id).subscribe(
-          customer => {
-            console.log('got ' + customer.firstName);
-            this.customer = customer;
-          }
-
-        );
+    super.getOrCreateCustomer();
   }
-
-  goBack() {
-    window.history.back();
-  }
-
-  save() {
-    this._customerService.saveCustomer(this.customer)
-                  .subscribe(
-                    customer =>{
-                      this.customer = customer; console.log(customer.firstName)
-                      this._router.navigate(['Customers'/*, { id: this.selectedEmployee.id }*/]);
-                    },
-                    error =>  this.errorMessage = <any>error);
-  }
-
 
 }

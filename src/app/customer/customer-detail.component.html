@@ -4,22 +4,27 @@
     <label>id:={{customer.id}} </label>
   </div>
   <div>
-    <div class="form-group">
 
-      <label>First Name: </label>
-      <input type="text" class="form-control" required
-           [(ngModel)]="customer.firstName"
-      >
 
-      <label>Last Name: </label>
-      <input type="text" class="form-control" required
-           [(ngModel)]="customer.lastName"
-      >
-    </div>
 
+    <form (ngSubmit)="save()" autocomplete="off"  #theForm="ngForm">
+        <label>First Name: </label>
+        <input type="text"  required [(ngModel)]="customer.firstName"
+        ngControl="firstName"  #name="ngForm"  #spy >
+        
+        <label>Last Name: </label>
+        <md-input type="text"  required
+             [(ngModel)]="customer.lastName" >
+        </md-input>
+
+      <customer-order-detail></customer-order-detail>
+
+    <button type="submit" class="btn btn-default" [disabled]="!theForm.form.valid">Submit</button>
+
+    </form>
   </div>
 
-  <button (click)="save()">Save</button>
+
 </div>
 
 <!--

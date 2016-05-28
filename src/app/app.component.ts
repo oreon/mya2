@@ -22,7 +22,7 @@ import {CustomerDetailComponent} from './customer/customer-detail.component'
   selector: 'app',
   pipes: [ ],
   providers: [ ],
-  directives: [  LoggedInRouterOutlet ],
+  directives: [ RouterActive , LoggedInRouterOutlet ],
   encapsulation: ViewEncapsulation.None,
   styles: [
     require('normalize.css'),

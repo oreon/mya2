@@ -1,5 +1,7 @@
-export class Customer {
-  id: number;
+import {BaseEntity} from '../common/BaseEntity';
+
+export class Customer extends BaseEntity {
+
   firstName: string;
   lastName:string;
   //dob:Date
