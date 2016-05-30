@@ -15,6 +15,13 @@
           autofocus>
         </md-input>
 
+        <button (click)="addEmployeeSkill()">Add Skill</button>
+       <md-list>
+        <md-list-item *ngFor="let friend of friends; let i = index">
+         <friend [entity]="friend"> </friend>
+         <button (click)="removeEmployeeSkill(i)">Remove</button>
+       </md-list-item>
+     </md-list>
         <button md-raised-button color="primary">Submit Value</button>
       </form>
       <!--

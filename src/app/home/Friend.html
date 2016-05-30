@@ -1,0 +1,13 @@
+<md-card>
+<md-input type="text" [(ngModel)]="entity.firstName" ></md-input>
+<md-input type="text" [(ngModel)]="entity.lastName" ></md-input>
+
+<button (click)="addHobby()">Add Hobby</button>
+<ul>
+<li *ngFor="let hobby of hobbies; let i = index">
+ <hobby [name]=hobby> </hobby>
+ <button (click)="removeHobby(i)">Remove</button>
+</li>
+</ul>
+
+</md-card>

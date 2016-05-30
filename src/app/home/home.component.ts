@@ -4,6 +4,10 @@ import {AppState} from '../app.service';
 import {Title} from './title';
 import {XLarge} from './x-large';
 
+import {Friend} from './Friend'
+import {FriendEntity} from './FriendEntity'
+
+
 import { Router } from '@angular/router-deprecated';
 
 @Component({
@@ -18,7 +22,7 @@ import { Router } from '@angular/router-deprecated';
   // We need to tell Angular's compiler which directives are in our template.
   // Doing so will allow Angular to attach our behavior to an element
   directives: [
-    XLarge
+    XLarge, Friend
   ],
   // We need to tell Angular's compiler which custom pipes are in our template.
   pipes: [ ],
@@ -30,6 +34,8 @@ import { Router } from '@angular/router-deprecated';
 export class Home {
   // Set our default values
   localState = { value: '' };
+
+  friends:FriendEntity[] = [{"firstName":"alex","lastName":"jones"}, {"firstName":"Mike","lastName":"stu"}]
   // TypeScript public modifiers
   constructor(public appState: AppState, public title: Title, public router: Router) {
 
@@ -48,6 +54,21 @@ export class Home {
   submitState(value) {
     console.log('submitState', value);
     this.appState.set('value', value);
+  }
+
+  addEmployeeSkill(){
+    var friend:FriendEntity= new FriendEntity() ;
+    this.friends.push(friend);
+  }
+
+  removeEmployeeSkill(index:number){
+    this.friends.splice(index, 1);
+  }
+
+  onEmployeeSkillChanged(newValue, index) {
+    console.log(newValue);
+  //  var current:Skill =  this.skills.filter(skill=> {return newValue == skill.id})[0];
+  //  this.employee.employeeSkills[index].skill = current;
   }
 
 }
