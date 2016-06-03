@@ -2,44 +2,54 @@ import { Component, Input, OnInit } from '@angular/core';
 import { RouteParams, Router } from '@angular/router-deprecated';
 
 import { SkillService} from '../skill/skill-service';
-//import { SkillType } from './customer';
+//import { SkillType } from './record';
 
 import { BaseEntity } from './BaseEntity';
 
 import { BaseHttpService } from './BaseHttpService';
 
-import { DBService } from '../common/db-service';
+//import { DBService } from '../common/db-service';
 
 
 export abstract class BaseDetailComponent<T extends BaseEntity> implements OnInit {
   @Input()
-  customer: T;
-  errorMessage:String
+  protected record: T;
+  protected errorMessage:String
 
   abstract createInstance():T;
   abstract   getSuccessUrl()
 
+
+
   constructor(
-    protected _customerService: BaseHttpService<T>,
-    protected _dbService:DBService,
+    protected _recordService: BaseHttpService<T>,
+    //protected _dbService:DBService,
     protected _routeParams: RouteParams,
     protected _router: Router
   ) {}
 
   getOrCreateCustomer(){
     let id = +this._routeParams.get('id');
+    
+    if(this.getRecord()) return;
 
-    if(!id || id == 0 ){
-      this.customer = this.createInstance();
+    if(  !id || id == 0 ){
+      console.log('creating record')
+      this.record = this.createInstance();
+      this.setRecord(this.record);
       return;
     }
 
-    this._customerService.getById(id).subscribe(
-      customer => {
-        this.customer = customer;
+    this._recordService.getById(id).subscribe(
+      record => {
+        this.record = record;
+        this.setRecord(this.record);
       }
     );
   }
+  
+  setRecord(t:T){}
+  getRecord():T{ return null;}
 
   ngOnInit() {
     this.getOrCreateCustomer()
@@ -50,10 +60,11 @@ export abstract class BaseDetailComponent<T extends BaseEntity> implements OnIni
   }
 
   save() {
-    this._customerService.save(this.customer)
+    console.log('called ' + this.getRecord());
+    this._recordService.save(this.getRecord())
                   .subscribe(
-                    customer =>{
-                      this.customer = customer; //console.log('saving ' + customer.firstName)
+                    record =>{
+                      this.record = record; //console.log('saving ' + record.firstName)
                       this._router.navigate([this.getSuccessUrl()/*, { id: this.selectedEmployee.id }*/]);
                     },
                     error =>  this.errorMessage = <any>error);

@@ -1,4 +1,7 @@
 {
+  "atom": {
+    "rewriteTsconfig": true
+  },
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",

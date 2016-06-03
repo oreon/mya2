@@ -28,8 +28,8 @@ export abstract class BaseHttpService<T extends BaseEntity>{
   }
 
   getById (id:number): Observable<T> {
-    console.log("calling " + id)
-    return this.http.get(this.fullUrl() + "/" + id)
+    let wurl = this.fullUrl() + "Writable";
+    return this.http.get(wurl + "/" + id)
                     .map(this.extractData)
                     //.catch(this.handleError);
   }

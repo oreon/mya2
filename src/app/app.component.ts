@@ -11,9 +11,11 @@ import {RouterActive} from './router-active';
 
 import {LoggedInRouterOutlet} from './LoggedInOutlet';
 
-import {CustomersComponent} from './customer/customers.component'
-import {CustomerDetailComponent} from './customer/customer-detail.component'
+import {CustomerListComponent} from './customer/CustomerListComponent'
+import {CustomerDetailComponent} from './customer/CustomerDetailComponent'
 
+import {CustomerOrderListComponent} from './customerOrder/CustomerOrderListComponent'
+import {CustomerOrderDetailComponent} from './customerOrder/CustomerOrderDetailComponent'
 /*
  * App Component
  * Top Level Component
@@ -102,8 +104,11 @@ import {CustomerDetailComponent} from './customer/customer-detail.component'
   { path: '/',      name: 'Index', component: Home, useAsDefault: true },
   { path: '/home',  name: 'Home',  component: Home },
   { path: '/login',  name: 'Login',  component: Login },
-  { path: '/customers',  name: 'Customers',  component: CustomersComponent },
+  { path: '/customers',  name: 'Customers',  component: CustomerListComponent },
   { path: '/customers/:id',  name: 'CustomerDetail',  component: CustomerDetailComponent },
+  { path: '/customerOrders',  name: 'CustomerOrders',  component: CustomerOrderListComponent },
+  { path: '/customerOrders/:id',  name: 'CustomerOrderDetail',  component: CustomerOrderDetailComponent },
+
   // Async load a component using Webpack's require with es6-promise-loader and webpack `require`
   { path: '/about', name: 'About', loader: () => require('es6-promise!./about')('About') }
 ])

@@ -1,0 +1,30 @@
+
+<h2>Products</h2>
+
+<button md-raised-button color="primary" [routerLink]="['/ProductDetail',{'id':0}]">Create New</button>
+{{errorMessage}}
+
+<ul>
+  <li *ngFor="let product of products">
+   
+	
+		{{product.name}}	
+	
+
+	
+		{{product.price}}	
+	
+
+	
+		{{product.image}}	
+	
+
+	
+		{{product.displayTill}}	
+	
+  <a [routerLink]="['/ProductDetail',{'id':product.id}]">
+    <span class="badge">{{product.id}}</span> 
+  </a>
+  <button (click)="delete(product)">Delete</button>
+  </li>
+</ul>

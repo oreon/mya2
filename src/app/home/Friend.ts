@@ -46,7 +46,7 @@ export class Friend {
 
 
     addHobby(){
-      var friend:FriendEntity= new FriendEntity() ;
+      var friend:FriendEntity= <FriendEntity>{} ;
       this.hobbies.push(' ');
     }
 

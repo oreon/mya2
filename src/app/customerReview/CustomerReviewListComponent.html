@@ -1,0 +1,29 @@
+
+<h2>CustomerReviews</h2>
+
+<button md-raised-button color="primary" [routerLink]="['/CustomerReviewDetail',{'id':0}]">Create New</button>
+{{errorMessage}}
+
+<ul>
+  <li *ngFor="let customerReview of customerReviews">
+   
+		
+	 <a class="btn btn-default" title="View" href="/customer/{{customerReview.customer.id}}">
+        {{customerReview.customer.displayName}}
+     </a>
+	
+	
+
+	
+		{{customerReview.review}}	
+	
+
+	
+		{{customerReview.rating}}	
+	
+  <a [routerLink]="['/CustomerReviewDetail',{'id':customerReview.id}]">
+    <span class="badge">{{customerReview.id}}</span> 
+  </a>
+  <button (click)="delete(customerReview)">Delete</button>
+  </li>
+</ul>

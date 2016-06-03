@@ -57,7 +57,7 @@ export class Home {
   }
 
   addEmployeeSkill(){
-    var friend:FriendEntity= new FriendEntity() ;
+    var friend:FriendEntity= <FriendEntity>{} ;
     this.friends.push(friend);
   }
 

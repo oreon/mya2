@@ -1,6 +1,6 @@
-import {BaseEntity} from '../common/BaseEntity';
+//import {BaseEntity} from '../common/BaseEntity';
 
-export class FriendEntity  {
+export interface FriendEntity  {
 
   firstName: string;
   lastName:string;

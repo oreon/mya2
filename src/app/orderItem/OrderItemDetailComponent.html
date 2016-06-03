@@ -1,0 +1,18 @@
+
+ 
+<div *ngIf="orderItem">
+  
+  <md-card>
+ 
+	 <label for="qty">Qty</label>
+	
+ <md-input type="text"  required [(ngModel)]="orderItem.qty"   ></md-input>
+	   <label for="productId">Product</label>
+    <select class="form-control" required  [ngModel]="orderItem?.product" (ngModelChange)="onProductChanged($event,i)">
+       <option>Please Select </option>
+       <option *ngFor="let p of products" [value]="p.id" >{{p.displayName}}</option>
+    </select>
+{{orderItem|json}}
+  </md-card>
+
+</div>

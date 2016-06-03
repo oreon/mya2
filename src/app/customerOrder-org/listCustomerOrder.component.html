@@ -1,0 +1,22 @@
+
+<h2>CustomerOrders</h2>
+
+<button md-raised-button color="primary" [routerLink]="['/CustomerOrderDetail',{'id':0}]">Create New</button>
+{{errorMessage}}
+
+<ul>
+  <li *ngFor="let customerOrder of records">
+
+
+	 <a class="btn btn-default" title="View" href="/customer/{{customerOrder.customer.id}}">
+        {{customerOrder.customer.displayName}}
+     </a>
+
+		{{customerOrder.notes}}
+
+  <a [routerLink]="['/CustomerOrderDetail',{'id':customerOrder.id}]">
+    <span class="badge">{{customerOrder.id}}</span>
+  </a>
+  <button (click)="delete(customerOrder)">Delete</button>
+  </li>
+</ul>

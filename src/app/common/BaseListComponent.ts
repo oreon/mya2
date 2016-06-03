@@ -10,32 +10,30 @@ import { BaseHttpService } from './BaseHttpService';
 
 
 
-export abstract class BaseListComponent<T extends BaseEntity> implements OnInit {
-  customers:BaseEntity[];
-  selectedBaseEntity:BaseEntity;
+export abstract class BaseListComponent<T extends BaseEntity>{
+  records:T[];
+  selectedBaseEntity:T;
   errorMessage:string;
 
   constructor(
   //  private _router: Router,
-  protected _customerService:BaseHttpService<T>) { }
+  protected _recordService:BaseHttpService<T>) { }
 
 
   getBaseEntitys() {
-    this._customerService.getRecords().subscribe(records =>{
-       this.customers = records;
+    this._recordService.getRecords().subscribe(records =>{
+       this.records = records;
+       this.setRecords(records)
      }
      );
   }
+  
+  setRecords(t:T[]){}
 
-  ngOnInit() {
-    this.getBaseEntitys();
-    console.log(this.customers);
-  }
-
-  delete(customer:T){
-    this._customerService.delete(customer).subscribe(
+  delete(record:T){
+    this._recordService.delete(record).subscribe(
       response => {
-        this.customers.forEach( (t, index) => {if (t.id === customer.id)  this.customers.splice(index, 1); })
+        this.records.forEach( (t, index) => {if (t.id === record.id)  this.records.splice(index, 1); })
       },
       error=>{
         this.errorMessage = error;

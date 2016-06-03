@@ -1,26 +1,27 @@
+
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-
-import { Customer } from './customer';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
-
-
-import { CustomerDetailComponent } from './customer-detail.component';
 
 import { BaseListComponent} from '../common/BaseListComponent'
 
-import { CustomerService } from './customer-service';
+import { CustomerDetailComponent } from './CustomerDetailComponent';
 
-let template = require('./customers.component.html');
+
+import { CustomerService } from './CustomerService';
+import {Customer} from '../common/AppEntities.ts';
+
+let template = require('./CustomerListComponent.html');
 
 @Component({
-  selector: 'customers',
+  selector: 'customer-list',
   template: template,
   providers:[CustomerService],
   directives: [CustomerDetailComponent, ROUTER_DIRECTIVES]
 })
-export class CustomersComponent extends BaseListComponent<Customer> implements OnInit {
+export class CustomerListComponent extends BaseListComponent<Customer> implements OnInit {
   customers:Customer[];
   selectedCustomer:Customer;
   errorMessage:string;
@@ -28,6 +29,12 @@ export class CustomersComponent extends BaseListComponent<Customer> implements O
   constructor(
   //  private _router: Router,
   protected _customerService:CustomerService) { super(_customerService); }
+  
+  ngOnInit() { 
+  	super.getBaseEntitys()
+  }
+  
+  setRecords( records:Customer[]){this.customers = records;}
 
 
 //  gotoDetail() {this._router.navigate(['CustomerDetail', { id: this.selectedCustomer.id }]);}

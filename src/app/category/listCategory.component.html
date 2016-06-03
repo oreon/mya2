@@ -1,0 +1,18 @@
+
+<h2>Categorys</h2>
+
+<button md-raised-button color="primary" [routerLink]="['/CategoryDetail',{'id':0}]">Create New</button>
+{{errorMessage}}
+
+<ul>
+  <li *ngFor="let category of categorys">
+   
+	
+		{{category.name}}	
+	
+  <a [routerLink]="['/CategoryDetail',{'id':category.id}]">
+    <span class="badge">{{category.id}}</span> 
+  </a>
+  <button (click)="delete(category)">Delete</button>
+  </li>
+</ul>

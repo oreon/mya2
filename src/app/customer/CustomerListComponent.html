@@ -1,15 +1,21 @@
-<h2>Employees</h2>
+
+<h2>Customers</h2>
 
 <button md-raised-button color="primary" [routerLink]="['/CustomerDetail',{'id':0}]">Create New</button>
 {{errorMessage}}
 
-
-
-<ul>
+<ul   >
   <li *ngFor="let customer of customers">
-    {{customer.firstName}}
+   
+	
+		{{customer.firstName}}	
+	
+
+	
+		{{customer.lastName}}	
+	
   <a [routerLink]="['/CustomerDetail',{'id':customer.id}]">
-    <span class="badge">{{customer.id}}</span> {{customer.firstName}} {{customer.lastName}}  {{customer.gender}}
+    <span class="badge">{{customer.id}}</span> 
   </a>
   <button (click)="delete(customer)">Delete</button>
   </li>
