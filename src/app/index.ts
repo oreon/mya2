@@ -1,27 +1,34 @@
-// App
+
+
 export * from './app.component';
 export * from './app.service';
 
 import {AppState} from './app.service';
 
+import {AppUserService} from './appUser/AppUserService'
+import {AppRoleService} from './appRole/AppRoleService'
+import {GroupService} from './group/GroupService'
+import {ProductService} from './product/ProductService'
+import {CategoryService} from './category/CategoryService'
 import {CustomerService} from './customer/CustomerService'
 import {CustomerOrderService} from './customerOrder/CustomerOrderService'
-import {CustomerReviewService} from './customerReview/CustomerReviewService'
-
-//import { CustomerReviewService } from './customerReview/CustomerReviewService';
-import {ProductService} from './product/ProductService'
 import {OrderItemService} from './orderItem/OrderItemService'
-
-import {CategoryService} from './category/CategoryService'
+import {EmployeeService} from './employee/EmployeeService'
+import {CustomerReviewService} from './customerReview/CustomerReviewService'
 
 
 // Application wide providers
 export const APP_PROVIDERS = [
   AppState,
-  CustomerService,
-  ProductService,
-  CustomerOrderService,
-  CustomerReviewService,
-  OrderItemService,
-  CategoryService,
+  	AppUserService,
+  	AppRoleService,
+  	GroupService,
+  	ProductService,
+  	CategoryService,
+  	CustomerService,
+  	CustomerOrderService,
+  	OrderItemService,
+  	EmployeeService,
+  	CustomerReviewService,
+  
 ];

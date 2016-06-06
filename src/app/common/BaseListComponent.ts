@@ -21,6 +21,7 @@ export abstract class BaseListComponent<T extends BaseEntity>{
 
 
   getBaseEntitys() {
+    if(this.getRecords()) return;    
     this._recordService.getRecords().subscribe(records =>{
        this.records = records;
        this.setRecords(records)
@@ -28,7 +29,9 @@ export abstract class BaseListComponent<T extends BaseEntity>{
      );
   }
   
-  setRecords(t:T[]){}
+  
+  abstract setRecords(t:T[]);
+  abstract getRecords():T[];
 
   delete(record:T){
     this._recordService.delete(record).subscribe(

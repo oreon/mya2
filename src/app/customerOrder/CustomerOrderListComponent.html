@@ -5,17 +5,14 @@
 {{errorMessage}}
 
 <ul>
-  <li *ngFor="let customerOrder of records">
+  <li *ngFor="let customerOrder of customerOrders">
    
-		
 	 <a class="btn btn-default" title="View" href="/customer/{{customerOrder.customer.id}}">
         {{customerOrder.customer.displayName}}
      </a>
-	
-	
-
-	
-		{{customerOrder.notes}}	
+		{{customerOrder.notes}}
+    
+    <orderItem-list [orderItems]="customerOrder.orderItems"></orderItem-list>
 	
   <a [routerLink]="['/CustomerOrderDetail',{'id':customerOrder.id}]">
     <span class="badge">{{customerOrder.id}}</span> 

@@ -3,22 +3,21 @@
 
 
 import {Customer} from '../common/AppEntities';
+  
+
+import {CustomerOrderListComponent} from '../customerOrder/CustomerOrderListComponent';
+
+import {CustomerOrderDetailComponent} from '../customerOrder/CustomerOrderDetailComponent';
 import {CustomerOrder} from '../common/AppEntities';
+
+import {CustomerReviewDetailComponent} from '../customerReview/CustomerReviewDetailComponent';
 import {CustomerReview} from '../common/AppEntities';
-
-
-
-
-import {CustomerOrderDetailComponent} from '../customerOrder/CustomerOrderDetailComponent'
-
-import {CustomerReviewDetailComponent} from '../customerReview/CustomerReviewDetailComponent'
 
 
 
 import { Component, Input, OnInit } from '@angular/core';
 import { RouteParams, Router } from '@angular/router-deprecated';
 
-//import { Customer } from './Customer';
 import { CustomerService } from './CustomerService';
 
 import { BaseDetailComponent } from '../common/BaseDetailComponent';
@@ -28,21 +27,18 @@ import { BaseDetailComponent } from '../common/BaseDetailComponent';
   selector: 'customer-detail',
   templateUrl: './app/customer/customerDetailComponent.html',
   //providers:[CustomerService]
-  directives: [  CustomerOrderDetailComponent ,CustomerReviewDetailComponent ]
+  directives: [ CustomerOrderListComponent, CustomerOrderDetailComponent ,CustomerReviewDetailComponent ]
 })
 export class CustomerDetailComponent  extends BaseDetailComponent<Customer> implements OnInit {
   
   @Input()
   customer: Customer;
   
-   setRecord( customer:Customer){this.customer = customer;} 
-   getRecord():Customer{return this.customer;}
-   //customerOrders : CustomerOrder[]
-  
-   //customerReviews : CustomerReview[]
-  
-  
-  
+  @Input()
+  customerView: Customer;
+ 
+  @Input()
+  protected embedded:boolean = false
   
   constructor(
   	
@@ -53,44 +49,39 @@ export class CustomerDetailComponent  extends BaseDetailComponent<Customer> impl
     super( _customerService,  _routeParams, _router);
   }
   
+   setRecord( customer:Customer){this.customer = customer;} 
+   getRecord():Customer{return this.customer;}
+   
+   setViewRecord(customer:Customer){this.customerView = customer;} 
   
-  createInstance():Customer { return  <Customer>{};}
+  createInstance():Customer { return <Customer>{}; }
   getSuccessUrl():string { return 'Customers'}
- 
-  
   
   ngOnInit() {
     super.ngOnInit();
   }
   
-  
-  
-  
   addCustomerOrder(){
-    console.log('new order')
-  this.customer.customerOrder.push(<CustomerOrder>{});
+   if(!this.customer.customerOrder) this.customer.customerOrder = [];
+   this.customer.customerOrder.push(<CustomerOrder>{});
   }
 
   removeCustomerOrder(index:number){
     this.customer.customerOrder.splice(index, 1);
   }
 
-  onCustomerOrderChanged(newValue, index) {
-    console.log(newValue);
-  }
+  onCustomerOrderChanged(newValue, index) {console.log(newValue);}
   
   addCustomerReview(){
-   console.log('new review')
-  this.customer.customerReview.push(<CustomerReview>{});
+   if(!this.customer.customerReview) this.customer.customerReview = [];
+   this.customer.customerReview.push(<CustomerReview>{});
   }
 
   removeCustomerReview(index:number){
     this.customer.customerReview.splice(index, 1);
   }
 
-  onCustomerReviewChanged(newValue, index) {
-    console.log(newValue);
-  }
+  onCustomerReviewChanged(newValue, index) {console.log(newValue);}
   
 
 

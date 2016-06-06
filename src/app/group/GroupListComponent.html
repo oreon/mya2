@@ -1,0 +1,14 @@
+
+<h2>Groups</h2>
+
+<button md-raised-button color="primary" [routerLink]="['/GroupDetail',{'id':0}]">Create New</button>
+{{errorMessage}}
+
+<ul>
+  <li *ngFor="let group of groups">
+  <a [routerLink]="['/GroupDetail',{'id':group.id}]">
+    <span class="badge">{{group.id}}</span> 
+  </a>
+  <button (click)="delete(group)">Delete</button>
+  </li>
+</ul>

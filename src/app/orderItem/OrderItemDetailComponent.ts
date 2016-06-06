@@ -2,14 +2,14 @@
 
 
 
-import {OrderItem} from '../common/AppEntities.ts';
+import {OrderItem} from '../common/AppEntities';
   
 
 import {CustomerOrderService} from '../customerOrder/CustomerOrderService'
-import {CustomerOrder} from '../common/AppEntities.ts';
+import {CustomerOrder} from '../common/AppEntities';
 
 import {ProductService} from '../product/ProductService'
-import {Product} from '../common/AppEntities.ts';
+import {Product} from '../common/AppEntities';
 
 
 
@@ -18,7 +18,6 @@ import {Product} from '../common/AppEntities.ts';
 import { Component, Input, OnInit } from '@angular/core';
 import { RouteParams, Router } from '@angular/router-deprecated';
 
-//import { OrderItem } from './OrderItem';
 import { OrderItemService } from './OrderItemService';
 
 import { BaseDetailComponent } from '../common/BaseDetailComponent';
@@ -35,8 +34,10 @@ export class OrderItemDetailComponent  extends BaseDetailComponent<OrderItem> im
   @Input()
   orderItem: OrderItem;
   
-   setRecord( record:OrderItem){this.orderItem = record;} 
-   getRecord():OrderItem{return this.orderItem;}
+  @Input()
+  protected embedded:boolean = false
+  
+  
   
     
   customerOrders : CustomerOrder[]
@@ -45,8 +46,10 @@ export class OrderItemDetailComponent  extends BaseDetailComponent<OrderItem> im
   
   
   constructor(
-  	protected _customerOrderService:CustomerOrderService,
-    protected _productService:ProductService,
+  
+    protected _customerOrderService: CustomerOrderService ,
+  
+    protected _productService: ProductService ,
     
     protected _orderItemService: OrderItemService,
     protected _routeParams: RouteParams,
@@ -55,17 +58,17 @@ export class OrderItemDetailComponent  extends BaseDetailComponent<OrderItem> im
     super( _orderItemService,  _routeParams, _router);
   }
   
+   setRecord( orderItem:OrderItem){this.orderItem = orderItem;} 
+   getRecord():OrderItem{return this.orderItem;}
   
-  createInstance():OrderItem {  return <OrderItem>{}}
+  createInstance():OrderItem { return <OrderItem>{}; }
   getSuccessUrl():string { return 'OrderItems'}
- 
-  
   
   ngOnInit() {
     super.ngOnInit();
-      
+  
     this._customerOrderService.getRecords().subscribe(records =>this.customerOrders = records);
-      
+  
     this._productService.getRecords().subscribe(records =>this.products = records);
     
   }

@@ -12,8 +12,13 @@ import { BaseHttpService } from './BaseHttpService';
 
 
 export abstract class BaseDetailComponent<T extends BaseEntity> implements OnInit {
+  //@Input()
+  //protected record: T;
+  
+    
   @Input()
-  protected record: T;
+  protected embedded:boolean = false
+  
   protected errorMessage:String
 
   abstract createInstance():T;
@@ -28,31 +33,32 @@ export abstract class BaseDetailComponent<T extends BaseEntity> implements OnIni
     protected _router: Router
   ) {}
 
-  getOrCreateCustomer(){
+  getOrCreateEntity(){
     let id = +this._routeParams.get('id');
     
     if(this.getRecord()) return;
 
     if(  !id || id == 0 ){
-      console.log('creating record')
-      this.record = this.createInstance();
-      this.setRecord(this.record);
+      this.setRecord(this.createInstance());
       return;
     }
 
     this._recordService.getById(id).subscribe(
-      record => {
-        this.record = record;
-        this.setRecord(this.record);
-      }
+      record => this.setRecord(record)
     );
+    
+    this._recordService.getById(id, true).subscribe(
+      record => this.setViewRecord(record)
+    );
+    
   }
   
+  setViewRecord(t:T){}
   setRecord(t:T){}
   getRecord():T{ return null;}
 
   ngOnInit() {
-    this.getOrCreateCustomer()
+    this.getOrCreateEntity()
   }
 
   goBack() {
@@ -64,7 +70,7 @@ export abstract class BaseDetailComponent<T extends BaseEntity> implements OnIni
     this._recordService.save(this.getRecord())
                   .subscribe(
                     record =>{
-                      this.record = record; //console.log('saving ' + record.firstName)
+                      this.setRecord( record); //console.log('saving ' + record.firstName)
                       this._router.navigate([this.getSuccessUrl()/*, { id: this.selectedEmployee.id }*/]);
                     },
                     error =>  this.errorMessage = <any>error);

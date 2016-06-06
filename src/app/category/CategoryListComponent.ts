@@ -1,6 +1,6 @@
 
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
@@ -22,13 +22,19 @@ let template = require('./CategoryListComponent.html');
   directives: [CategoryDetailComponent, ROUTER_DIRECTIVES]
 })
 export class CategoryListComponent extends BaseListComponent<Category> implements OnInit {
+
+  @Input()
   categorys:Category[];
+  
   selectedCategory:Category;
   errorMessage:string;
 
   constructor(
   //  private _router: Router,
   protected _categoryService:CategoryService) { super(_categoryService); }
+  
+  setRecords( category:Category[]){this.categorys = category;} 
+  getRecords():Category[]{return this.categorys;}
   
   ngOnInit() { 
   	super.getBaseEntitys()

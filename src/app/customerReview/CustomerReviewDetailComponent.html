@@ -1,19 +1,16 @@
 
  
 <div *ngIf="customerReview">
-  <h2>CustomerReview details!</h2>
+  <h2 *ngIf="!embedded" >CustomerReview Details</h2>
   <md-card>
-
     <form (ngSubmit)="save()" autocomplete="off"  #theForm="ngForm">
     	
  
  
 
-	 <label for="customerId">Customer</label>
-
-    
-    <select class="form-control" required  [ngModel]="customerReview?.id" (ngModelChange)="onCustomerChanged($event,i)">
-       <option>Please Select </option>
+  
+   <select  *ngIf="!embedded" required  [ngModel]="customerReview?.customer" (ngModelChange)="onCustomerChanged($event,i)">
+       <option>Select Customer</option>
        <option *ngFor="let p of customers" [value]="p.id" >{{p.displayName}}</option>
     </select>
 
@@ -22,8 +19,6 @@
 	
  
  
-
-	 <label for="review">Review</label>
 
  
 		
@@ -37,23 +32,19 @@
  
  
 
-	 <label for="rating">Rating</label>
-
  
 		
 	
- 		 <md-input type="text"  required [(ngModel)]="customerReview.rating" ngControl="rating"  #name="ngForm"></md-input>
+ 		 <md-input type="text" placeholder="Rating" [(ngModel)]="customerReview.rating" ngControl="rating"  #name="ngForm"></md-input>
 	
 
  
  
 	
-
 
       	
-	<button type="submit" class="btn btn-default" [disabled]="!theForm.form.valid">Submit</button>
+	<button type="submit" class="btn btn-default" [disabled]="!theForm.form.valid"  *ngIf="!embedded">Submit</button>
 
     </form>
   </md-card>
-
 </div>

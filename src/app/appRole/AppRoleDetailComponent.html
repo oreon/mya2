@@ -1,8 +1,9 @@
 
  
-<div *ngIf="category">
-  <h2 *ngIf="!embedded" >Category Details</h2>
+<div *ngIf="appRole">
+  <h2 *ngIf="!embedded" >AppRole Details</h2>
   <md-card>
+
     <form (ngSubmit)="save()" autocomplete="off"  #theForm="ngForm">
     	
  
@@ -11,16 +12,18 @@
  
 		
 	
- 		 <md-input type="text" placeholder="Name" [(ngModel)]="category.name" ngControl="name"  #name="ngForm"></md-input>
+ 		 <md-input type="text" placeholder="Name" [(ngModel)]="appRole.name" ngControl="name"  #name="ngForm"></md-input>
 	
 
  
  
 	
+
 
       	
 	<button type="submit" class="btn btn-default" [disabled]="!theForm.form.valid"  *ngIf="!embedded">Submit</button>
 
     </form>
   </md-card>
+
 </div>

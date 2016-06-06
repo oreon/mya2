@@ -1,44 +1,53 @@
+<div *ngIf="customerView">
+  <md-card>
+    {{customerView.firstName}}
+	
+	<customerOrder-list  [customerOrders]="customerView.customerOrder"></customerOrder-list>
+	<customerReview-list   [customerReviews]="customerView.customerReview"></customerReview-list>
+	
+  </md-card>
+</div>
+ 
 <div *ngIf="customer">
-	<h2>Customer details!</h2>
-	<md-card>
+  <h2 *ngIf="!embedded" >Customer Details</h2>
+  <md-card>
+    <form (ngSubmit)="save()" autocomplete="off"  #theForm="ngForm">
+    
+ 		 <md-input type="text" placeholder="First Name" [(ngModel)]="customer.firstName" ngControl="firstName"  #name="ngForm"></md-input>
+	
+ 		 <md-input type="text" placeholder="Last Name" [(ngModel)]="customer.lastName" ngControl="lastName"  #name="ngForm"></md-input>
 
-		<form (ngSubmit)="save()" autocomplete="off" #theForm="ngForm">
+	<ul>
+ 
+	<button (click)="addCustomerOrder()"  type="button">Add Customer Order</button>
+ 
+	<li *ngFor=" let customerOrder of customer.customerOrder; let i = index">
+		<customerOrder-detail  [embedded]="true" [customerOrder]="customerOrder"></customerOrder-detail>
+		
+		  
+	<button (click)="addCustomerOrder()"  type="button">Add Customer Order</button>
+		  
+	<button (click)="removeCustomerOrder(i)" type="button">Remove</button>
+		  
+     </li>
+	</ul>
+	<ul>
+ 
+	<button (click)="addCustomerReview()"  type="button">Add Customer Review</button>
+ 
+	<li *ngFor=" let customerReview of customer.customerReview; let i = index">
+		<customerReview-detail  [embedded]="true" [customerReview]="customerReview"></customerReview-detail>
+		
+		  
+	<button (click)="addCustomerReview()"  type="button">Add Customer Review</button>
+		  
+	<button (click)="removeCustomerReview(i)" type="button">Remove</button>
+		  
+     </li>
+	</ul>
+      	
+	<button type="submit" class="btn btn-default" [disabled]="!theForm.form.valid"  *ngIf="!embedded">Submit</button>
 
-			<label for="firstName">First Name</label>
-
-			<md-input type="text" required [(ngModel)]="customer.firstName" ngControl="firstName" #firstName="ngForm"></md-input>
-
-			<label for="lastName">Last Name</label>
-
-			<md-input type="text" required [(ngModel)]="customer.lastName" ngControl="lastName" #lastName="ngForm"></md-input>
-
-			<ul>
-			  {{customer.customerOrder|json}}
-				<button (click)="addCustomerOrder()" type="button">Add Order</button>
-					
-				<li *ngFor=" let customerOrder of customer.customerOrder; let i = index">
-					<customerOrder-detail [customerOrder]="customerOrder"></customerOrder-detail>
-					<button md-raised-button color="secondary" (click)="addCustomerOrder()" type="button">Add</button>
-					<button md-raised-button color="secondary" (click)="removeCustomerOrder(i)" type="button">Remove</button>
-				</li>
-			</ul>
-			<ul>
-
-				<button (click)="addCustomerReview()" type="button">Add Review</button>
-
-				<li *ngFor=" let customerReview of customer.customerReview; let i = index">
-					<customerReview-detail [customerReview]="customerReview"></customerReview-detail>
-
-					<button (click)="addCustomerReview()" type="button">Add</button>
-
-					<button (click)="removeCustomerReview(i)">Remove</button>
-
-				</li>
-			</ul>
-			{{theForm.form.valid}}
-			<button type="submit" [disabled]="!theForm.form.valid">Save</button>
-
-		</form>
-	</md-card>
-
+    </form>
+  </md-card>
 </div>

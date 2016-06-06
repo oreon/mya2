@@ -2,22 +2,22 @@
 
 
 
-import {CustomerOrder} from '../common/AppEntities.ts';
+import {CustomerOrder} from '../common/AppEntities';
   
 
 import {CustomerService} from '../customer/CustomerService'
-import {Customer} from '../common/AppEntities.ts';
-import {OrderItem} from '../common/AppEntities.ts';
+import {Customer} from '../common/AppEntities';
 
 
-import {OrderItemDetailComponent} from '../orderItem/OrderItemDetailComponent'
+
+import {OrderItemDetailComponent} from '../orderItem/OrderItemDetailComponent';
+import {OrderItem} from '../common/AppEntities';
 
 
 
 import { Component, Input, OnInit } from '@angular/core';
 import { RouteParams, Router } from '@angular/router-deprecated';
 
-//import { CustomerOrder } from './CustomerOrder';
 import { CustomerOrderService } from './CustomerOrderService';
 
 import { BaseDetailComponent } from '../common/BaseDetailComponent';
@@ -34,18 +34,21 @@ export class CustomerOrderDetailComponent  extends BaseDetailComponent<CustomerO
   @Input()
   customerOrder: CustomerOrder;
   
+  @Input()
+  protected embedded:boolean = false
+  
   
    //orderItems : OrderItem[]
-   setRecord( customerOrder:CustomerOrder){this.customerOrder = customerOrder;} 
-   getRecord():CustomerOrder{return this.customerOrder;}
-   
+  
   
     
   customers : Customer[]
   
   
   constructor(
-  	 protected _customerService: CustomerService,
+  
+    protected _customerService: CustomerService ,
+    
     protected _customerOrderService: CustomerOrderService,
     protected _routeParams: RouteParams,
     protected _router: Router	
@@ -53,38 +56,36 @@ export class CustomerOrderDetailComponent  extends BaseDetailComponent<CustomerO
     super( _customerOrderService,  _routeParams, _router);
   }
   
+   setRecord( customerOrder:CustomerOrder){this.customerOrder = customerOrder;} 
+   getRecord():CustomerOrder{return this.customerOrder;}
   
-  createInstance():CustomerOrder { return  <CustomerOrder>{}}
+  createInstance():CustomerOrder { return <CustomerOrder>{}; }
   getSuccessUrl():string { return 'CustomerOrders'}
- 
-  
   
   ngOnInit() {
     super.ngOnInit();
+  
     this._customerService.getRecords().subscribe(records =>this.customers = records);
     
   }
   
     
    onCustomerChanged(newValue, index) {
-    this.record.customer = newValue;
+    this.getRecord().customer = newValue;
   }
   
   
   
   addOrderItems(){
-    console.log('adding')
-    if(!this.customerOrder.orderItems) { this.customerOrder.orderItems = [] }
-    this.customerOrder.orderItems.push( <OrderItem>{"qty":1});
+   if(!this.customerOrder.orderItems) this.customerOrder.orderItems = [];
+   this.customerOrder.orderItems.push(<OrderItem>{});
   }
 
   removeOrderItems(index:number){
     this.customerOrder.orderItems.splice(index, 1);
   }
 
-  onOrderItemsChanged(newValue, index) {
-    console.log(newValue);
-  }
+  onOrderItemsChanged(newValue, index) {console.log(newValue);}
   
 
 

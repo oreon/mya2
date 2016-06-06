@@ -1,6 +1,6 @@
 
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
@@ -22,13 +22,19 @@ let template = require('./ProductListComponent.html');
   directives: [ProductDetailComponent, ROUTER_DIRECTIVES]
 })
 export class ProductListComponent extends BaseListComponent<Product> implements OnInit {
+
+  @Input()
   products:Product[];
+  
   selectedProduct:Product;
   errorMessage:string;
 
   constructor(
   //  private _router: Router,
   protected _productService:ProductService) { super(_productService); }
+  
+  setRecords( product:Product[]){this.products = product;} 
+  getRecords():Product[]{return this.products;}
   
   ngOnInit() { 
   	super.getBaseEntitys()

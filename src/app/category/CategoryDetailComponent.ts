@@ -2,7 +2,7 @@
 
 
 
-import {Category} from '../common/AppEntities.ts';
+import {Category} from '../common/AppEntities';
   
 
 
@@ -12,7 +12,6 @@ import {Category} from '../common/AppEntities.ts';
 import { Component, Input, OnInit } from '@angular/core';
 import { RouteParams, Router } from '@angular/router-deprecated';
 
-//import { Category } from './Category';
 import { CategoryService } from './CategoryService';
 
 import { BaseDetailComponent } from '../common/BaseDetailComponent';
@@ -29,6 +28,9 @@ export class CategoryDetailComponent  extends BaseDetailComponent<Category> impl
   @Input()
   category: Category;
   
+  @Input()
+  protected embedded:boolean = false
+  
   
   
   
@@ -42,11 +44,11 @@ export class CategoryDetailComponent  extends BaseDetailComponent<Category> impl
     super( _categoryService,  _routeParams, _router);
   }
   
+   setRecord( category:Category){this.category = category;} 
+   getRecord():Category{return this.category;}
   
-  createInstance():Category { return new Category()}
+  createInstance():Category { return <Category>{}; }
   getSuccessUrl():string { return 'Categorys'}
- 
-  
   
   ngOnInit() {
     super.ngOnInit();

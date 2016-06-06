@@ -1,6 +1,6 @@
 
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
@@ -22,13 +22,19 @@ let template = require('./EmployeeListComponent.html');
   directives: [EmployeeDetailComponent, ROUTER_DIRECTIVES]
 })
 export class EmployeeListComponent extends BaseListComponent<Employee> implements OnInit {
+
+  @Input()
   employees:Employee[];
+  
   selectedEmployee:Employee;
   errorMessage:string;
 
   constructor(
   //  private _router: Router,
   protected _employeeService:EmployeeService) { super(_employeeService); }
+  
+  setRecords( employee:Employee[]){this.employees = employee;} 
+  getRecords():Employee[]{return this.employees;}
   
   ngOnInit() { 
   	super.getBaseEntitys()

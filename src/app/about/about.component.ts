@@ -18,18 +18,7 @@ console.log('`About` component loaded asynchronously');
       margin: 25px;
     }
   `],
-  template: `
-  <md-card>
-    For hot module reloading run
-    <pre>npm run start:hmr</pre>
-  </md-card>
-  <md-card>
-    <h3>
-      patrick@AngularClass.com
-    </h3>
-  </md-card>
-
-  `
+  templateUrl: './app/about/about.html'
 })
 export class About {
   constructor() {

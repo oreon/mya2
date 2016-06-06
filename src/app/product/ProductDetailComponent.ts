@@ -2,7 +2,7 @@
 
 
 
-import {Product} from '../common/AppEntities.ts';
+import {Product} from '../common/AppEntities';
   
 
 
@@ -12,7 +12,6 @@ import {Product} from '../common/AppEntities.ts';
 import { Component, Input, OnInit } from '@angular/core';
 import { RouteParams, Router } from '@angular/router-deprecated';
 
-//import { Product } from './Product';
 import { ProductService } from './ProductService';
 
 import { BaseDetailComponent } from '../common/BaseDetailComponent';
@@ -29,6 +28,9 @@ export class ProductDetailComponent  extends BaseDetailComponent<Product> implem
   @Input()
   product: Product;
   
+  @Input()
+  protected embedded:boolean = false
+  
   
   
   
@@ -42,11 +44,11 @@ export class ProductDetailComponent  extends BaseDetailComponent<Product> implem
     super( _productService,  _routeParams, _router);
   }
   
+   setRecord( product:Product){this.product = product;} 
+   getRecord():Product{return this.product;}
   
-  createInstance():Product { return new Product()}
+  createInstance():Product { return <Product>{}; }
   getSuccessUrl():string { return 'Products'}
- 
-  
   
   ngOnInit() {
     super.ngOnInit();

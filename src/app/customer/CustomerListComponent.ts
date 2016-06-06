@@ -1,6 +1,6 @@
 
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
@@ -22,7 +22,10 @@ let template = require('./CustomerListComponent.html');
   directives: [CustomerDetailComponent, ROUTER_DIRECTIVES]
 })
 export class CustomerListComponent extends BaseListComponent<Customer> implements OnInit {
+
+  @Input()
   customers:Customer[];
+  
   selectedCustomer:Customer;
   errorMessage:string;
 
@@ -30,11 +33,12 @@ export class CustomerListComponent extends BaseListComponent<Customer> implement
   //  private _router: Router,
   protected _customerService:CustomerService) { super(_customerService); }
   
+  setRecords( customer:Customer[]){this.customers = customer;} 
+  getRecords():Customer[]{return this.customers;}
+  
   ngOnInit() { 
   	super.getBaseEntitys()
   }
-  
-  setRecords( records:Customer[]){this.customers = records;}
 
 
 //  gotoDetail() {this._router.navigate(['CustomerDetail', { id: this.selectedCustomer.id }]);}

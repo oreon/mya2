@@ -27,8 +27,9 @@ export abstract class BaseHttpService<T extends BaseEntity>{
                   //  .catch(this.handleError);
   }
 
-  getById (id:number): Observable<T> {
-    let wurl = this.fullUrl() + "Writable";
+  getById (id:number, complete:boolean = false): Observable<T> {
+    
+    let wurl = this.fullUrl() + (  complete ?"Complete" : "Writable") ;
     return this.http.get(wurl + "/" + id)
                     .map(this.extractData)
                     //.catch(this.handleError);

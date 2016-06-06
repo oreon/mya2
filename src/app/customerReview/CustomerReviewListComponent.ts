@@ -1,6 +1,6 @@
 
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
@@ -22,13 +22,19 @@ let template = require('./CustomerReviewListComponent.html');
   directives: [CustomerReviewDetailComponent, ROUTER_DIRECTIVES]
 })
 export class CustomerReviewListComponent extends BaseListComponent<CustomerReview> implements OnInit {
+
+  @Input()
   customerReviews:CustomerReview[];
+  
   selectedCustomerReview:CustomerReview;
   errorMessage:string;
 
   constructor(
   //  private _router: Router,
   protected _customerReviewService:CustomerReviewService) { super(_customerReviewService); }
+  
+  setRecords( customerReview:CustomerReview[]){this.customerReviews = customerReview;} 
+  getRecords():CustomerReview[]{return this.customerReviews;}
   
   ngOnInit() { 
   	super.getBaseEntitys()

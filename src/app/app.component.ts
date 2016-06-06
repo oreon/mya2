@@ -3,7 +3,6 @@
  */
 import {Component, ViewEncapsulation} from '@angular/core';
 import {RouteConfig, Router} from '@angular/router-deprecated';
-
 import {Home} from './home';
 import {Login} from './login/login';
 import {AppState} from './app.service';
@@ -11,11 +10,27 @@ import {RouterActive} from './router-active';
 
 import {LoggedInRouterOutlet} from './LoggedInOutlet';
 
+import {AppUserListComponent} from './appUser/AppUserListComponent'
+import {AppUserDetailComponent} from './appUser/AppUserDetailComponent'
+import {AppRoleListComponent} from './appRole/AppRoleListComponent'
+import {AppRoleDetailComponent} from './appRole/AppRoleDetailComponent'
+import {GroupListComponent} from './group/GroupListComponent'
+import {GroupDetailComponent} from './group/GroupDetailComponent'
+import {ProductListComponent} from './product/ProductListComponent'
+import {ProductDetailComponent} from './product/ProductDetailComponent'
+import {CategoryListComponent} from './category/CategoryListComponent'
+import {CategoryDetailComponent} from './category/CategoryDetailComponent'
 import {CustomerListComponent} from './customer/CustomerListComponent'
 import {CustomerDetailComponent} from './customer/CustomerDetailComponent'
-
 import {CustomerOrderListComponent} from './customerOrder/CustomerOrderListComponent'
 import {CustomerOrderDetailComponent} from './customerOrder/CustomerOrderDetailComponent'
+import {OrderItemListComponent} from './orderItem/OrderItemListComponent'
+import {OrderItemDetailComponent} from './orderItem/OrderItemDetailComponent'
+import {EmployeeListComponent} from './employee/EmployeeListComponent'
+import {EmployeeDetailComponent} from './employee/EmployeeDetailComponent'
+import {CustomerReviewListComponent} from './customerReview/CustomerReviewListComponent'
+import {CustomerReviewDetailComponent} from './customerReview/CustomerReviewDetailComponent'
+
 /*
  * App Component
  * Top Level Component
@@ -26,89 +41,35 @@ import {CustomerOrderDetailComponent} from './customerOrder/CustomerOrderDetailC
   providers: [ ],
   directives: [ RouterActive , LoggedInRouterOutlet ],
   encapsulation: ViewEncapsulation.None,
-  styles: [
-    require('normalize.css'),
-    `html, body{
-      height: 100%;
-      background: #F4FAFA;
-    }
-    button.active{
-      background: #fff;
-      color: #009688;
-    }
-    button.active:hover{
-      color: #fff;
-    }
-    .fill{
-      flex: 1 1 auto;
-    }
-    .app-state{
-      margin: 15px;
-      flex: 1;
-    }
-    .home{
-      flex: 1;
-    }
-    md-content{
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-    footer{
-      flex: 0 0 60px;
-      padding: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #fff;
-    }`
-  ],
-  template: `
-    <md-content>
-      <md-toolbar color="primary">
-          <span>{{ name }}</span>
-          <span class="fill"></span>
-          <button md-button router-active [routerLink]=" ['Index'] ">
-            Index
-          </button>
-          <button md-button router-active [routerLink]=" ['Home'] ">
-            Home
-          </button>
-          <button md-button router-active [routerLink]=" ['About'] ">
-            About
-          </button>
-          <button md-button router-active [routerLink]=" ['Login'] ">
-            Login
-          </button>
-          <button md-button router-active [routerLink]=" ['Customers'] ">
-            Customer
-          </button>
-
-
-      </md-toolbar>
-
-      <md-progress-bar mode="indeterminate" color="primary" *ngIf="loading"></md-progress-bar>
-
-      <auth-router-outlet></auth-router-outlet>
-
-      <pre class="app-state">this.appState.state = {{ appState.state | json }}</pre>
-
-      <footer>
-        <img [src]="angularclassLogo" width="6%">
-        WebPack Angular 2 Starter by <a [href]="url">@AngularClass</a>
-      </footer>
-      </md-content>
-  `
+  styles: [require('normalize.css'),require('./app.css')],
+  templateUrl: './app/app.component.html'
 })
 @RouteConfig([
   { path: '/',      name: 'Index', component: Home, useAsDefault: true },
   { path: '/home',  name: 'Home',  component: Home },
   { path: '/login',  name: 'Login',  component: Login },
+  { path: '/appUsers',  name: 'AppUsers',  component: AppUserListComponent },
+  { path: '/appUsers/:id',  name: 'AppUserDetail',  component: AppUserDetailComponent },
+  { path: '/appRoles',  name: 'AppRoles',  component: AppRoleListComponent },
+  { path: '/appRoles/:id',  name: 'AppRoleDetail',  component: AppRoleDetailComponent },
+  { path: '/groups',  name: 'Groups',  component: GroupListComponent },
+  { path: '/groups/:id',  name: 'GroupDetail',  component: GroupDetailComponent },
+  { path: '/products',  name: 'Products',  component: ProductListComponent },
+  { path: '/products/:id',  name: 'ProductDetail',  component: ProductDetailComponent },
+  { path: '/categorys',  name: 'Categorys',  component: CategoryListComponent },
+  { path: '/categorys/:id',  name: 'CategoryDetail',  component: CategoryDetailComponent },
   { path: '/customers',  name: 'Customers',  component: CustomerListComponent },
   { path: '/customers/:id',  name: 'CustomerDetail',  component: CustomerDetailComponent },
   { path: '/customerOrders',  name: 'CustomerOrders',  component: CustomerOrderListComponent },
   { path: '/customerOrders/:id',  name: 'CustomerOrderDetail',  component: CustomerOrderDetailComponent },
+  { path: '/orderItems',  name: 'OrderItems',  component: OrderItemListComponent },
+  { path: '/orderItems/:id',  name: 'OrderItemDetail',  component: OrderItemDetailComponent },
+  { path: '/employees',  name: 'Employees',  component: EmployeeListComponent },
+  { path: '/employees/:id',  name: 'EmployeeDetail',  component: EmployeeDetailComponent },
+  { path: '/customerReviews',  name: 'CustomerReviews',  component: CustomerReviewListComponent },
+  { path: '/customerReviews/:id',  name: 'CustomerReviewDetail',  component: CustomerReviewDetailComponent },
 
+	
   // Async load a component using Webpack's require with es6-promise-loader and webpack `require`
   { path: '/about', name: 'About', loader: () => require('es6-promise!./about')('About') }
 ])
@@ -118,21 +79,8 @@ export class App {
   name = 'Angular 2 Webpack Starter';
   url = 'https://twitter.com/AngularClass';
 
-  constructor(
-    public appState: AppState) {
+  constructor(public appState: AppState) {}
 
-  }
-
-  ngOnInit() {
-    console.log('Initial App State', this.appState.state);
-  }
-
+  ngOnInit() {console.log('Initial App State', this.appState.state);}
 }
 
-/*
- * Please review the https://github.com/AngularClass/angular2-examples/ repo for
- * more angular app examples that you may copy/paste
- * (The examples may not be updated as quickly. Please open an issue on github for us to update it)
- * For help or questions please contact us at @AngularClass on twitter
- * or our chat on Slack at https://AngularClass.com/slack-join
- */

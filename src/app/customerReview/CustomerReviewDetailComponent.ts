@@ -2,11 +2,11 @@
 
 
 
-import {CustomerReview} from '../common/AppEntities.ts';
+import {CustomerReview} from '../common/AppEntities';
   
 
 import {CustomerService} from '../customer/CustomerService'
-import {Customer} from '../common/AppEntities.ts';
+import {Customer} from '../common/AppEntities';
 
 
 
@@ -15,7 +15,6 @@ import {Customer} from '../common/AppEntities.ts';
 import { Component, Input, OnInit } from '@angular/core';
 import { RouteParams, Router } from '@angular/router-deprecated';
 
-//import { CustomerReview } from './CustomerReview';
 import { CustomerReviewService } from './CustomerReviewService';
 
 import { BaseDetailComponent } from '../common/BaseDetailComponent';
@@ -32,6 +31,9 @@ export class CustomerReviewDetailComponent  extends BaseDetailComponent<Customer
   @Input()
   customerReview: CustomerReview;
   
+  @Input()
+  protected embedded:boolean = false
+  
   
   
     
@@ -39,7 +41,9 @@ export class CustomerReviewDetailComponent  extends BaseDetailComponent<Customer
   
   
   constructor(
-  	protected _customerService: CustomerService,
+  
+    protected _customerService: CustomerService ,
+    
     protected _customerReviewService: CustomerReviewService,
     protected _routeParams: RouteParams,
     protected _router: Router	
@@ -47,22 +51,22 @@ export class CustomerReviewDetailComponent  extends BaseDetailComponent<Customer
     super( _customerReviewService,  _routeParams, _router);
   }
   
+   setRecord( customerReview:CustomerReview){this.customerReview = customerReview;} 
+   getRecord():CustomerReview{return this.customerReview;}
   
-  createInstance():CustomerReview { return  <CustomerReview>{}}
+  createInstance():CustomerReview { return <CustomerReview>{}; }
   getSuccessUrl():string { return 'CustomerReviews'}
- 
-  
   
   ngOnInit() {
     super.ngOnInit();
-      
+  
     this._customerService.getRecords().subscribe(records =>this.customers = records);
     
   }
   
     
    onCustomerChanged(newValue, index) {
-    this.record.customer = newValue;
+    this.getRecord().customer = newValue;
   }
   
   

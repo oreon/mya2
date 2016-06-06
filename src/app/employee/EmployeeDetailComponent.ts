@@ -2,7 +2,7 @@
 
 
 
-import {Employee} from '../common/AppEntities.ts';
+import {Employee} from '../common/AppEntities';
   
 
 
@@ -12,7 +12,6 @@ import {Employee} from '../common/AppEntities.ts';
 import { Component, Input, OnInit } from '@angular/core';
 import { RouteParams, Router } from '@angular/router-deprecated';
 
-//import { Employee } from './Employee';
 import { EmployeeService } from './EmployeeService';
 
 import { BaseDetailComponent } from '../common/BaseDetailComponent';
@@ -29,6 +28,9 @@ export class EmployeeDetailComponent  extends BaseDetailComponent<Employee> impl
   @Input()
   employee: Employee;
   
+  @Input()
+  protected embedded:boolean = false
+  
   
   
   
@@ -42,11 +44,11 @@ export class EmployeeDetailComponent  extends BaseDetailComponent<Employee> impl
     super( _employeeService,  _routeParams, _router);
   }
   
+   setRecord( employee:Employee){this.employee = employee;} 
+   getRecord():Employee{return this.employee;}
   
-  createInstance():Employee { return new Employee()}
+  createInstance():Employee { return <Employee>{}; }
   getSuccessUrl():string { return 'Employees'}
- 
-  
   
   ngOnInit() {
     super.ngOnInit();

@@ -1,6 +1,6 @@
 
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
@@ -22,13 +22,19 @@ let template = require('./OrderItemListComponent.html');
   directives: [OrderItemDetailComponent, ROUTER_DIRECTIVES]
 })
 export class OrderItemListComponent extends BaseListComponent<OrderItem> implements OnInit {
+
+  @Input()
   orderItems:OrderItem[];
+  
   selectedOrderItem:OrderItem;
   errorMessage:string;
 
   constructor(
   //  private _router: Router,
   protected _orderItemService:OrderItemService) { super(_orderItemService); }
+  
+  setRecords( orderItem:OrderItem[]){this.orderItems = orderItem;} 
+  getRecords():OrderItem[]{return this.orderItems;}
   
   ngOnInit() { 
   	super.getBaseEntitys()

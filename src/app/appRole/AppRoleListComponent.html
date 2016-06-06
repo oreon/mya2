@@ -1,0 +1,18 @@
+
+<h2>AppRoles</h2>
+
+<button md-raised-button color="primary" [routerLink]="['/AppRoleDetail',{'id':0}]">Create New</button>
+{{errorMessage}}
+
+<ul>
+  <li *ngFor="let appRole of appRoles">
+   
+	
+		{{appRole.name}}	
+	
+  <a [routerLink]="['/AppRoleDetail',{'id':appRole.id}]">
+    <span class="badge">{{appRole.id}}</span> 
+  </a>
+  <button (click)="delete(appRole)">Delete</button>
+  </li>
+</ul>
