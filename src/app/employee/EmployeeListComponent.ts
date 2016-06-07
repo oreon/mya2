@@ -11,7 +11,15 @@ import { EmployeeDetailComponent } from './EmployeeDetailComponent';
 
 
 import { EmployeeService } from './EmployeeService';
-import {Employee} from '../common/AppEntities.ts';
+
+
+
+import {Employee} from '../common/AppEntities';
+  
+
+
+
+
 
 let template = require('./EmployeeListComponent.html');
 
@@ -25,6 +33,9 @@ export class EmployeeListComponent extends BaseListComponent<Employee> implement
 
   @Input()
   employees:Employee[];
+  
+  @Input()
+  protected embedded:boolean = false
   
   selectedEmployee:Employee;
   errorMessage:string;

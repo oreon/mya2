@@ -11,7 +11,18 @@ import { CustomerReviewDetailComponent } from './CustomerReviewDetailComponent';
 
 
 import { CustomerReviewService } from './CustomerReviewService';
-import {CustomerReview} from '../common/AppEntities.ts';
+
+
+
+import {CustomerReview} from '../common/AppEntities';
+  
+
+import {CustomerService} from '../customer/CustomerService'
+import {Customer} from '../common/AppEntities';
+
+
+
+
 
 let template = require('./CustomerReviewListComponent.html');
 
@@ -25,6 +36,9 @@ export class CustomerReviewListComponent extends BaseListComponent<CustomerRevie
 
   @Input()
   customerReviews:CustomerReview[];
+  
+  @Input()
+  protected embedded:boolean = false
   
   selectedCustomerReview:CustomerReview;
   errorMessage:string;

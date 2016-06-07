@@ -35,6 +35,10 @@ export class OrderItemDetailComponent  extends BaseDetailComponent<OrderItem> im
   orderItem: OrderItem;
   
   @Input()
+  orderItemView: OrderItem;
+  
+  
+  @Input()
   protected embedded:boolean = false
   
   
@@ -60,6 +64,8 @@ export class OrderItemDetailComponent  extends BaseDetailComponent<OrderItem> im
   
    setRecord( orderItem:OrderItem){this.orderItem = orderItem;} 
    getRecord():OrderItem{return this.orderItem;}
+   
+   setViewRecord(orderItem:OrderItem){this.orderItemView = orderItem;}
   
   createInstance():OrderItem { return <OrderItem>{}; }
   getSuccessUrl():string { return 'OrderItems'}

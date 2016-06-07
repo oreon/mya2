@@ -11,7 +11,15 @@ import { CategoryDetailComponent } from './CategoryDetailComponent';
 
 
 import { CategoryService } from './CategoryService';
-import {Category} from '../common/AppEntities.ts';
+
+
+
+import {Category} from '../common/AppEntities';
+  
+
+
+
+
 
 let template = require('./CategoryListComponent.html');
 
@@ -25,6 +33,9 @@ export class CategoryListComponent extends BaseListComponent<Category> implement
 
   @Input()
   categorys:Category[];
+  
+  @Input()
+  protected embedded:boolean = false
   
   selectedCategory:Category;
   errorMessage:string;

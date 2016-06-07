@@ -32,6 +32,10 @@ export class CustomerReviewDetailComponent  extends BaseDetailComponent<Customer
   customerReview: CustomerReview;
   
   @Input()
+  customerReviewView: CustomerReview;
+  
+  
+  @Input()
   protected embedded:boolean = false
   
   
@@ -53,6 +57,8 @@ export class CustomerReviewDetailComponent  extends BaseDetailComponent<Customer
   
    setRecord( customerReview:CustomerReview){this.customerReview = customerReview;} 
    getRecord():CustomerReview{return this.customerReview;}
+   
+   setViewRecord(customerReview:CustomerReview){this.customerReviewView = customerReview;}
   
   createInstance():CustomerReview { return <CustomerReview>{}; }
   getSuccessUrl():string { return 'CustomerReviews'}

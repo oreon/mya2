@@ -1,7 +1,7 @@
 
-<h2>Employees</h2>
+<h4 *ngIf="!embedded">Employees</h4>
 
-<button md-raised-button color="primary" [routerLink]="['/EmployeeDetail',{'id':0}]">Create New</button>
+<button *ngIf="!embedded" md-raised-button color="primary" [routerLink]="['/EmployeeDetail',{'id':0}]">Create New</button>
 {{errorMessage}}
 
 <ul>
@@ -21,6 +21,9 @@
   <a [routerLink]="['/EmployeeDetail',{'id':employee.id}]">
     <span class="badge">{{employee.id}}</span> 
   </a>
-  <button (click)="delete(employee)">Delete</button>
+  <button *ngIf="!embedded" (click)="delete(employee)">Delete</button>
+  <div  *ngIf="embedded">
+   
+  </div>
   </li>
 </ul>

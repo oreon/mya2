@@ -29,6 +29,10 @@ export class ProductDetailComponent  extends BaseDetailComponent<Product> implem
   product: Product;
   
   @Input()
+  productView: Product;
+  
+  
+  @Input()
   protected embedded:boolean = false
   
   
@@ -46,6 +50,8 @@ export class ProductDetailComponent  extends BaseDetailComponent<Product> implem
   
    setRecord( product:Product){this.product = product;} 
    getRecord():Product{return this.product;}
+   
+   setViewRecord(product:Product){this.productView = product;}
   
   createInstance():Product { return <Product>{}; }
   getSuccessUrl():string { return 'Products'}

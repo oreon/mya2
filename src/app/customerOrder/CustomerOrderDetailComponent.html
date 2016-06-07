@@ -1,4 +1,13 @@
 
+
+<div *ngIf="customerOrderView">
+<md-card>
+  View CustomerOrder
+	
+  <orderItem-list [embedded]="true" [orderItemses]="customerOrderView.orderItems"></orderItem-list>
+   
+</md-card>
+</div>
  
 <div *ngIf="customerOrder">
   <h2 *ngIf="!embedded" >CustomerOrder Details</h2>

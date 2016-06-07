@@ -11,7 +11,23 @@ import { CustomerDetailComponent } from './CustomerDetailComponent';
 
 
 import { CustomerService } from './CustomerService';
-import {Customer} from '../common/AppEntities.ts';
+
+
+
+import {Customer} from '../common/AppEntities';
+  
+
+
+
+import {CustomerOrderDetailComponent} from '../customerOrder/CustomerOrderDetailComponent';
+import {CustomerOrderListComponent} from '../customerOrder/CustomerOrderListComponent';
+import {CustomerOrder} from '../common/AppEntities';
+
+import {CustomerReviewDetailComponent} from '../customerReview/CustomerReviewDetailComponent';
+import {CustomerReviewListComponent} from '../customerReview/CustomerReviewListComponent';
+import {CustomerReview} from '../common/AppEntities';
+
+
 
 let template = require('./CustomerListComponent.html');
 
@@ -19,12 +35,15 @@ let template = require('./CustomerListComponent.html');
   selector: 'customer-list',
   template: template,
   providers:[CustomerService],
-  directives: [CustomerDetailComponent, ROUTER_DIRECTIVES]
+  directives: [CustomerOrderListComponent,CustomerReviewListComponent,CustomerDetailComponent, ROUTER_DIRECTIVES]
 })
 export class CustomerListComponent extends BaseListComponent<Customer> implements OnInit {
 
   @Input()
   customers:Customer[];
+  
+  @Input()
+  protected embedded:boolean = false
   
   selectedCustomer:Customer;
   errorMessage:string;

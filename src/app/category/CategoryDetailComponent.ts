@@ -29,6 +29,10 @@ export class CategoryDetailComponent  extends BaseDetailComponent<Category> impl
   category: Category;
   
   @Input()
+  categoryView: Category;
+  
+  
+  @Input()
   protected embedded:boolean = false
   
   
@@ -46,6 +50,8 @@ export class CategoryDetailComponent  extends BaseDetailComponent<Category> impl
   
    setRecord( category:Category){this.category = category;} 
    getRecord():Category{return this.category;}
+   
+   setViewRecord(category:Category){this.categoryView = category;}
   
   createInstance():Category { return <Category>{}; }
   getSuccessUrl():string { return 'Categorys'}

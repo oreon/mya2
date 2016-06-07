@@ -1,22 +1,26 @@
 
-<h2>CustomerOrders</h2>
+<h4 *ngIf="!embedded">CustomerOrders</h4>
 
-<button md-raised-button color="primary" [routerLink]="['/CustomerOrderDetail',{'id':0}]">Create New</button>
+<button *ngIf="!embedded" md-raised-button color="primary" [routerLink]="['/CustomerOrderDetail',{'id':0}]">Create New</button>
 {{errorMessage}}
 
 <ul>
   <li *ngFor="let customerOrder of customerOrders">
    
-	 <a class="btn btn-default" title="View" href="/customer/{{customerOrder.customer.id}}">
-        {{customerOrder.customer.displayName}}
-     </a>
-		{{customerOrder.notes}}
-    
-    <orderItem-list [orderItems]="customerOrder.orderItems"></orderItem-list>
+<a   *ngIf="!embedded" class="btn btn-default" title="View" href="/customer/{{customerOrder.customer.id}}">{{customerOrder.customer.displayName}}</a>
+	
+	
+
+	
+		{{customerOrder.notes}}	
 	
   <a [routerLink]="['/CustomerOrderDetail',{'id':customerOrder.id}]">
     <span class="badge">{{customerOrder.id}}</span> 
   </a>
-  <button (click)="delete(customerOrder)">Delete</button>
+  <button *ngIf="!embedded" (click)="delete(customerOrder)">Delete</button>
+  <div  *ngIf="embedded">
+  <orderItem-list [embedded]="true" [orderItems]="customerOrder.orderItems"></orderItem-list>
+   
+  </div>
   </li>
 </ul>

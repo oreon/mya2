@@ -1,21 +1,44 @@
+
+
 <div *ngIf="customerView">
-  <md-card>
-    {{customerView.firstName}}
+<md-card>
+  View Customer
 	
-	<customerOrder-list  [customerOrders]="customerView.customerOrder"></customerOrder-list>
-	<customerReview-list   [customerReviews]="customerView.customerReview"></customerReview-list>
-	
-  </md-card>
+  <customerOrder-list [embedded]="true" [customerOrders]="customerView.customerOrder"></customerOrder-list>
+  <customerReview-list [embedded]="true" [customerReviews]="customerView.customerReview"></customerReview-list>
+   
+</md-card>
 </div>
  
 <div *ngIf="customer">
   <h2 *ngIf="!embedded" >Customer Details</h2>
   <md-card>
     <form (ngSubmit)="save()" autocomplete="off"  #theForm="ngForm">
-    
+    	
+ 
+ 
+
+ 
+		
+	
  		 <md-input type="text" placeholder="First Name" [(ngModel)]="customer.firstName" ngControl="firstName"  #name="ngForm"></md-input>
 	
+
+ 
+ 
+	
+ 
+ 
+
+ 
+		
+	
  		 <md-input type="text" placeholder="Last Name" [(ngModel)]="customer.lastName" ngControl="lastName"  #name="ngForm"></md-input>
+	
+
+ 
+ 
+	
 
 	<ul>
  

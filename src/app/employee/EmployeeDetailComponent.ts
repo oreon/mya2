@@ -29,6 +29,10 @@ export class EmployeeDetailComponent  extends BaseDetailComponent<Employee> impl
   employee: Employee;
   
   @Input()
+  employeeView: Employee;
+  
+  
+  @Input()
   protected embedded:boolean = false
   
   
@@ -46,6 +50,8 @@ export class EmployeeDetailComponent  extends BaseDetailComponent<Employee> impl
   
    setRecord( employee:Employee){this.employee = employee;} 
    getRecord():Employee{return this.employee;}
+   
+   setViewRecord(employee:Employee){this.employeeView = employee;}
   
   createInstance():Employee { return <Employee>{}; }
   getSuccessUrl():string { return 'Employees'}

@@ -11,7 +11,21 @@ import { OrderItemDetailComponent } from './OrderItemDetailComponent';
 
 
 import { OrderItemService } from './OrderItemService';
-import {OrderItem} from '../common/AppEntities.ts';
+
+
+
+import {OrderItem} from '../common/AppEntities';
+  
+
+import {CustomerOrderService} from '../customerOrder/CustomerOrderService'
+import {CustomerOrder} from '../common/AppEntities';
+
+import {ProductService} from '../product/ProductService'
+import {Product} from '../common/AppEntities';
+
+
+
+
 
 let template = require('./OrderItemListComponent.html');
 
@@ -25,6 +39,9 @@ export class OrderItemListComponent extends BaseListComponent<OrderItem> impleme
 
   @Input()
   orderItems:OrderItem[];
+  
+  @Input()
+  protected embedded:boolean = false
   
   selectedOrderItem:OrderItem;
   errorMessage:string;

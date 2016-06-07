@@ -1,7 +1,7 @@
 
-<h2>Customers</h2>
+<h4 *ngIf="!embedded">Customers</h4>
 
-<button md-raised-button color="primary" [routerLink]="['/CustomerDetail',{'id':0}]">Create New</button>
+<button *ngIf="!embedded" md-raised-button color="primary" [routerLink]="['/CustomerDetail',{'id':0}]">Create New</button>
 {{errorMessage}}
 
 <ul>
@@ -17,6 +17,11 @@
   <a [routerLink]="['/CustomerDetail',{'id':customer.id}]">
     <span class="badge">{{customer.id}}</span> 
   </a>
-  <button (click)="delete(customer)">Delete</button>
+  <button *ngIf="!embedded" (click)="delete(customer)">Delete</button>
+  <div  *ngIf="embedded">
+  <customerOrder-list [embedded]="true" [customerOrder]="customer.customerOrder"></customerOrder-list>
+  <customerReview-list [embedded]="true" [customerReview]="customer.customerReview"></customerReview-list>
+   
+  </div>
   </li>
 </ul>

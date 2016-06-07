@@ -5,12 +5,14 @@
 import {Customer} from '../common/AppEntities';
   
 
-import {CustomerOrderListComponent} from '../customerOrder/CustomerOrderListComponent';
+
 
 import {CustomerOrderDetailComponent} from '../customerOrder/CustomerOrderDetailComponent';
+import {CustomerOrderListComponent} from '../customerOrder/CustomerOrderListComponent';
 import {CustomerOrder} from '../common/AppEntities';
 
 import {CustomerReviewDetailComponent} from '../customerReview/CustomerReviewDetailComponent';
+import {CustomerReviewListComponent} from '../customerReview/CustomerReviewListComponent';
 import {CustomerReview} from '../common/AppEntities';
 
 
@@ -27,7 +29,7 @@ import { BaseDetailComponent } from '../common/BaseDetailComponent';
   selector: 'customer-detail',
   templateUrl: './app/customer/customerDetailComponent.html',
   //providers:[CustomerService]
-  directives: [ CustomerOrderListComponent, CustomerOrderDetailComponent ,CustomerReviewDetailComponent ]
+  directives: [  CustomerOrderDetailComponent, CustomerOrderListComponent  ,CustomerReviewDetailComponent, CustomerReviewListComponent  ]
 })
 export class CustomerDetailComponent  extends BaseDetailComponent<Customer> implements OnInit {
   
@@ -36,9 +38,18 @@ export class CustomerDetailComponent  extends BaseDetailComponent<Customer> impl
   
   @Input()
   customerView: Customer;
- 
+  
+  
   @Input()
   protected embedded:boolean = false
+  
+  
+   //customerOrders : CustomerOrder[]
+  
+   //customerReviews : CustomerReview[]
+  
+  
+  
   
   constructor(
   	
@@ -52,14 +63,18 @@ export class CustomerDetailComponent  extends BaseDetailComponent<Customer> impl
    setRecord( customer:Customer){this.customer = customer;} 
    getRecord():Customer{return this.customer;}
    
-   setViewRecord(customer:Customer){this.customerView = customer;} 
+   setViewRecord(customer:Customer){this.customerView = customer;}
   
   createInstance():Customer { return <Customer>{}; }
   getSuccessUrl():string { return 'Customers'}
   
   ngOnInit() {
     super.ngOnInit();
+    
   }
+  
+  
+  
   
   addCustomerOrder(){
    if(!this.customer.customerOrder) this.customer.customerOrder = [];

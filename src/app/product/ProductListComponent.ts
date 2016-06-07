@@ -11,7 +11,15 @@ import { ProductDetailComponent } from './ProductDetailComponent';
 
 
 import { ProductService } from './ProductService';
-import {Product} from '../common/AppEntities.ts';
+
+
+
+import {Product} from '../common/AppEntities';
+  
+
+
+
+
 
 let template = require('./ProductListComponent.html');
 
@@ -25,6 +33,9 @@ export class ProductListComponent extends BaseListComponent<Product> implements 
 
   @Input()
   products:Product[];
+  
+  @Input()
+  protected embedded:boolean = false
   
   selectedProduct:Product;
   errorMessage:string;

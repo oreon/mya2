@@ -11,6 +11,7 @@ import {Customer} from '../common/AppEntities';
 
 
 import {OrderItemDetailComponent} from '../orderItem/OrderItemDetailComponent';
+import {OrderItemListComponent} from '../orderItem/OrderItemListComponent';
 import {OrderItem} from '../common/AppEntities';
 
 
@@ -27,12 +28,16 @@ import { BaseDetailComponent } from '../common/BaseDetailComponent';
   selector: 'customerOrder-detail',
   templateUrl: './app/customerOrder/customerOrderDetailComponent.html',
   //providers:[CustomerOrderService]
-  directives: [  OrderItemDetailComponent ]
+  directives: [  OrderItemDetailComponent, OrderItemListComponent  ]
 })
 export class CustomerOrderDetailComponent  extends BaseDetailComponent<CustomerOrder> implements OnInit {
   
   @Input()
   customerOrder: CustomerOrder;
+  
+  @Input()
+  customerOrderView: CustomerOrder;
+  
   
   @Input()
   protected embedded:boolean = false
@@ -58,6 +63,8 @@ export class CustomerOrderDetailComponent  extends BaseDetailComponent<CustomerO
   
    setRecord( customerOrder:CustomerOrder){this.customerOrder = customerOrder;} 
    getRecord():CustomerOrder{return this.customerOrder;}
+   
+   setViewRecord(customerOrder:CustomerOrder){this.customerOrderView = customerOrder;}
   
   createInstance():CustomerOrder { return <CustomerOrder>{}; }
   getSuccessUrl():string { return 'CustomerOrders'}
