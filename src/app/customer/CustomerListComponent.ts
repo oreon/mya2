@@ -27,6 +27,7 @@ import {CustomerReviewDetailComponent} from '../customerReview/CustomerReviewDet
 import {CustomerReviewListComponent} from '../customerReview/CustomerReviewListComponent';
 import {CustomerReview} from '../common/AppEntities';
 
+import { CustomerEditComponent } from './CustomerEditComponent';
 
 
 let template = require('./CustomerListComponent.html');
@@ -35,7 +36,7 @@ let template = require('./CustomerListComponent.html');
   selector: 'customer-list',
   template: template,
   providers:[CustomerService],
-  directives: [CustomerOrderListComponent,CustomerReviewListComponent,CustomerDetailComponent, ROUTER_DIRECTIVES]
+  directives: [CustomerEditComponent, CustomerOrderListComponent,CustomerReviewListComponent,CustomerDetailComponent, ROUTER_DIRECTIVES]
 })
 export class CustomerListComponent extends BaseListComponent<Customer> implements OnInit {
 

@@ -4,6 +4,7 @@ export * from './app.component';
 export * from './app.service';
 
 import {AppState} from './app.service';
+import { EventService} from './common/EventService'
 
 import {AppUserService} from './appUser/AppUserService'
 import {AppRoleService} from './appRole/AppRoleService'
@@ -20,6 +21,7 @@ import {CustomerReviewService} from './customerReview/CustomerReviewService'
 // Application wide providers
 export const APP_PROVIDERS = [
   AppState,
+  EventService,
   	AppUserService,
   	AppRoleService,
   	GroupService,

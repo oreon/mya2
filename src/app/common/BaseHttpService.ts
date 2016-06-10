@@ -1,4 +1,4 @@
-import {Injectable}     from '@angular/core';
+import {Injectable, EventEmitter}     from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import {Observable}     from 'rxjs/Observable';
 
@@ -13,11 +13,18 @@ import {BaseEntity}  from './BaseEntity'
 @Injectable()
 export abstract class BaseHttpService<T extends BaseEntity>{
 
-  constructor (protected http: Http) {}
-
-  baseUrl = "http://localhost:8000/api/v1/"
+   baseUrl = "http://localhost:8000/api/v1/"
 
   abstract getUrl():string
+
+  public itemAdded$: EventEmitter<T>;
+
+
+  constructor (protected http: Http) {  
+   
+  }
+
+ 
 
   fullUrl():string{   return this.baseUrl + this.getUrl() }
 
@@ -67,8 +74,9 @@ export abstract class BaseHttpService<T extends BaseEntity>{
     if (res.status < 200 || res.status >= 300) {
       throw new Error('Bad response status: ' + res.status);
     }
-    let body = res.json();
+    let body = res.json(); 
     console.log("got from httpservice" + body);
+    //this.itemAdded$.emit(body);
     return body || { };
   }
 

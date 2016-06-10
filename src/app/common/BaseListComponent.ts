@@ -15,6 +15,9 @@ export abstract class BaseListComponent<T extends BaseEntity>{
   selectedBaseEntity:T;
   errorMessage:string;
 
+  // @Input()
+  protected editMode:boolean = false
+
   constructor(
   //  private _router: Router,
   protected _recordService:BaseHttpService<T>) { }

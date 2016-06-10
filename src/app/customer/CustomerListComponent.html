@@ -6,12 +6,7 @@
 
 <ul>
   <li *ngFor="let customer of customers">
-   
-	
 		{{customer.firstName}}	
-	
-
-	
 		{{customer.lastName}}	
 	
   <a [routerLink]="['/CustomerDetail',{'id':customer.id}]">
@@ -25,3 +20,7 @@
   </div>
   </li>
 </ul>
+</div>
+
+
+

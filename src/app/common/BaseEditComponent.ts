@@ -14,7 +14,7 @@ import { EventService} from '../common/EventService'
 //import { DBService } from '../common/db-service';
 
 
-export abstract class BaseDetailComponent<T extends BaseEntity> implements OnInit {
+export abstract class BaseEditComponent<T extends BaseEntity> implements OnInit {
   //@Input()
   //protected record: T;
   
@@ -28,8 +28,8 @@ export abstract class BaseDetailComponent<T extends BaseEntity> implements OnIni
   abstract   getSuccessUrl()
 
   
-  @Input()
-  protected editMode:boolean = false
+  //@Input()
+  //protected editMode:boolean = false
 
   constructor(
     protected _recordService: BaseHttpService<T>,
@@ -45,16 +45,15 @@ export abstract class BaseDetailComponent<T extends BaseEntity> implements OnIni
 
     if(  !id || id == 0 ){
       this.setRecord(this.createInstance());
-      this.editMode = true;
       return;
     }
 
     this.fetchEditRecord(id);
-    this.fetchViewRecord(id);  
+   // this.fetchViewRecord(id);  
   }
 
   fetchEditRecord(id:number){  this._recordService.getById(id).subscribe(record => this.setRecord(record)); } 
-  fetchViewRecord(id:number){ this._recordService.getById(id, true).subscribe(record => this.setViewRecord(record)); } 
+ // fetchViewRecord(id:number){ this._recordService.getById(id, true).subscribe(record => this.setViewRecord(record)); } 
 
   
   abstract setViewRecord(t:T)
@@ -71,6 +70,14 @@ export abstract class BaseDetailComponent<T extends BaseEntity> implements OnIni
     window.history.back();
   }
 
-  enableEdit(){ this.editMode = true }
+  save() {  
+   this._recordService.save(this.getRecord())
+                  .subscribe(
+                    record =>{
+                    if(this.getEventService() )  this.getEventService().add(record);
+                     // this._router.navigate([this.getSuccessUrl()/*, { id: this.selectedEmployee.id }*/]);
+                    },
+                    error =>  this.errorMessage = <any>error);
+  }
 
 }
