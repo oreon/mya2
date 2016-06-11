@@ -1,11 +1,11 @@
 
-<h4 *ngIf="!embedded">CustomerReviews</h4>
+<h4 *ngIf="!embedded">CustomerReview List</h4>
 
-<button *ngIf="!embedded" md-raised-button color="primary" [routerLink]="['/CustomerReviewDetail',{'id':0}]">Create New</button>
+<button  md-raised-button color="primary" [routerLink]="['/CustomerReviewDetail',{'id':0}]">New CustomerReview</button>
 {{errorMessage}}
 
 <ul>
-  <li *ngFor="let customerReview of customerReviews">
+  <li *ngFor="let customerReview of customerReviewList">
    
 <a   *ngIf="!embedded" class="btn btn-default" title="View" href="/customer/{{customerReview.customer.id}}">{{customerReview.customer.displayName}}</a>
 	
@@ -18,9 +18,7 @@
 	
 		{{customerReview.rating}}	
 	
-  <a [routerLink]="['/CustomerReviewDetail',{'id':customerReview.id}]">
-    <span class="badge">{{customerReview.id}}</span> 
-  </a>
+  <button [routerLink]="['/CustomerReviewDetail',{'id':customerReview.id}]">Edit {{customerReview.id}}</button>
   <button *ngIf="!embedded" (click)="delete(customerReview)">Delete</button>
   <div  *ngIf="embedded">
    

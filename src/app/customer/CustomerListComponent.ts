@@ -14,20 +14,21 @@ import { CustomerService } from './CustomerService';
 
 
 
-import {Customer} from '../common/AppEntities';
-  
+	import {Customer} from '../common/AppEntities';
+	import { EventService} from '../common/EventService'
+	  
+	
+	
+	
+	import {CustomerOrderEditComponent} from '../customerOrder/CustomerOrderEditComponent';
+	import {CustomerOrderListComponent} from '../customerOrder/CustomerOrderListComponent';
+	import {CustomerOrder} from '../common/AppEntities';
+	
+	import {CustomerReviewEditComponent} from '../customerReview/CustomerReviewEditComponent';
+	import {CustomerReviewListComponent} from '../customerReview/CustomerReviewListComponent';
+	import {CustomerReview} from '../common/AppEntities';
+	
 
-
-
-import {CustomerOrderDetailComponent} from '../customerOrder/CustomerOrderDetailComponent';
-import {CustomerOrderListComponent} from '../customerOrder/CustomerOrderListComponent';
-import {CustomerOrder} from '../common/AppEntities';
-
-import {CustomerReviewDetailComponent} from '../customerReview/CustomerReviewDetailComponent';
-import {CustomerReviewListComponent} from '../customerReview/CustomerReviewListComponent';
-import {CustomerReview} from '../common/AppEntities';
-
-import { CustomerEditComponent } from './CustomerEditComponent';
 
 
 let template = require('./CustomerListComponent.html');
@@ -36,29 +37,39 @@ let template = require('./CustomerListComponent.html');
   selector: 'customer-list',
   template: template,
   providers:[CustomerService],
-  directives: [CustomerEditComponent, CustomerOrderListComponent,CustomerReviewListComponent,CustomerDetailComponent, ROUTER_DIRECTIVES]
+  directives: [CustomerOrderListComponent,CustomerReviewListComponent,CustomerDetailComponent, ROUTER_DIRECTIVES]
 })
 export class CustomerListComponent extends BaseListComponent<Customer> implements OnInit {
 
   @Input()
-  customers:Customer[];
+  customerList:Customer[];
   
   @Input()
   protected embedded:boolean = false
-  
-  selectedCustomer:Customer;
+   
+  customer:Customer;
   errorMessage:string;
 
   constructor(
   //  private _router: Router,
   protected _customerService:CustomerService) { super(_customerService); }
   
-  setRecords( customer:Customer[]){this.customers = customer;} 
-  getRecords():Customer[]{return this.customers;}
+  setRecords( customer:Customer[]){this.customerList = customer;} 
+  getRecords():Customer[]{return this.customerList;}
   
   ngOnInit() { 
   	super.getBaseEntitys()
   }
+  
+  getEmbedded():boolean{ return this.embedded}
+  
+  setRecord( customer:Customer){this.customer = customer;} 
+  getRecord():Customer{return this.customer;}
+   
+  setViewRecord(customer:Customer){  }
+  
+  createInstance():Customer { return <Customer>{}; }
+  getSuccessUrl():string { return 'Customers'}
 
 
 //  gotoDetail() {this._router.navigate(['CustomerDetail', { id: this.selectedCustomer.id }]);}

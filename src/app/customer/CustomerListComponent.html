@@ -1,26 +1,25 @@
 
-<h4 *ngIf="!embedded">Customers</h4>
+<h4 *ngIf="!embedded">Customer List</h4>
 
-<button *ngIf="!embedded" md-raised-button color="primary" [routerLink]="['/CustomerDetail',{'id':0}]">Create New</button>
+<button  md-raised-button color="primary" [routerLink]="['/CustomerDetail',{'id':0}]">New Customer</button>
 {{errorMessage}}
 
 <ul>
-  <li *ngFor="let customer of customers">
+  <li *ngFor="let customer of customerList">
+   
+	
 		{{customer.firstName}}	
+	
+
+	
 		{{customer.lastName}}	
 	
-  <a [routerLink]="['/CustomerDetail',{'id':customer.id}]">
-    <span class="badge">{{customer.id}}</span> 
-  </a>
+  <button [routerLink]="['/CustomerDetail',{'id':customer.id}]">Edit {{customer.id}}</button>
   <button *ngIf="!embedded" (click)="delete(customer)">Delete</button>
   <div  *ngIf="embedded">
-  <customerOrder-list [embedded]="true" [customerOrder]="customer.customerOrder"></customerOrder-list>
-  <customerReview-list [embedded]="true" [customerReview]="customer.customerReview"></customerReview-list>
+  <customerOrder-list [embedded]="true" [customerOrderList]="customer.customerOrder"></customerOrder-list>
+  <customerReview-list [embedded]="true" [customerReviewList]="customer.customerReview"></customerReview-list>
    
   </div>
   </li>
 </ul>
-</div>
-
-
-

@@ -14,17 +14,19 @@ import { CustomerOrderService } from './CustomerOrderService';
 
 
 
-import {CustomerOrder} from '../common/AppEntities';
-  
-
-import {CustomerService} from '../customer/CustomerService'
-import {Customer} from '../common/AppEntities';
-
-
-
-import {OrderItemDetailComponent} from '../orderItem/OrderItemDetailComponent';
-import {OrderItemListComponent} from '../orderItem/OrderItemListComponent';
-import {OrderItem} from '../common/AppEntities';
+	import {CustomerOrder} from '../common/AppEntities';
+	import { EventService} from '../common/EventService'
+	  
+	
+	import {CustomerService} from '../customer/CustomerService'
+	import {Customer} from '../common/AppEntities';
+	
+	
+	
+	import {OrderItemEditComponent} from '../orderItem/OrderItemEditComponent';
+	import {OrderItemListComponent} from '../orderItem/OrderItemListComponent';
+	import {OrderItem} from '../common/AppEntities';
+	
 
 
 
@@ -39,24 +41,34 @@ let template = require('./CustomerOrderListComponent.html');
 export class CustomerOrderListComponent extends BaseListComponent<CustomerOrder> implements OnInit {
 
   @Input()
-  customerOrders:CustomerOrder[];
+  customerOrderList:CustomerOrder[];
   
   @Input()
   protected embedded:boolean = false
-  
-  selectedCustomerOrder:CustomerOrder;
+   
+  customerOrder:CustomerOrder;
   errorMessage:string;
 
   constructor(
   //  private _router: Router,
   protected _customerOrderService:CustomerOrderService) { super(_customerOrderService); }
   
-  setRecords( customerOrder:CustomerOrder[]){this.customerOrders = customerOrder;} 
-  getRecords():CustomerOrder[]{return this.customerOrders;}
+  setRecords( customerOrder:CustomerOrder[]){this.customerOrderList = customerOrder;} 
+  getRecords():CustomerOrder[]{return this.customerOrderList;}
   
   ngOnInit() { 
   	super.getBaseEntitys()
   }
+  
+  getEmbedded():boolean{ return this.embedded}
+  
+  setRecord( customerOrder:CustomerOrder){this.customerOrder = customerOrder;} 
+  getRecord():CustomerOrder{return this.customerOrder;}
+   
+  setViewRecord(customerOrder:CustomerOrder){  }
+  
+  createInstance():CustomerOrder { return <CustomerOrder>{}; }
+  getSuccessUrl():string { return 'CustomerOrders'}
 
 
 //  gotoDetail() {this._router.navigate(['CustomerOrderDetail', { id: this.selectedCustomerOrder.id }]);}

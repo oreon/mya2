@@ -14,13 +14,15 @@ import { CustomerReviewService } from './CustomerReviewService';
 
 
 
-import {CustomerReview} from '../common/AppEntities';
-  
-
-import {CustomerService} from '../customer/CustomerService'
-import {Customer} from '../common/AppEntities';
-
-
+	import {CustomerReview} from '../common/AppEntities';
+	import { EventService} from '../common/EventService'
+	  
+	
+	import {CustomerService} from '../customer/CustomerService'
+	import {Customer} from '../common/AppEntities';
+	
+	
+	
 
 
 
@@ -35,24 +37,34 @@ let template = require('./CustomerReviewListComponent.html');
 export class CustomerReviewListComponent extends BaseListComponent<CustomerReview> implements OnInit {
 
   @Input()
-  customerReviews:CustomerReview[];
+  customerReviewList:CustomerReview[];
   
   @Input()
   protected embedded:boolean = false
-  
-  selectedCustomerReview:CustomerReview;
+   
+  customerReview:CustomerReview;
   errorMessage:string;
 
   constructor(
   //  private _router: Router,
   protected _customerReviewService:CustomerReviewService) { super(_customerReviewService); }
   
-  setRecords( customerReview:CustomerReview[]){this.customerReviews = customerReview;} 
-  getRecords():CustomerReview[]{return this.customerReviews;}
+  setRecords( customerReview:CustomerReview[]){this.customerReviewList = customerReview;} 
+  getRecords():CustomerReview[]{return this.customerReviewList;}
   
   ngOnInit() { 
   	super.getBaseEntitys()
   }
+  
+  getEmbedded():boolean{ return this.embedded}
+  
+  setRecord( customerReview:CustomerReview){this.customerReview = customerReview;} 
+  getRecord():CustomerReview{return this.customerReview;}
+   
+  setViewRecord(customerReview:CustomerReview){  }
+  
+  createInstance():CustomerReview { return <CustomerReview>{}; }
+  getSuccessUrl():string { return 'CustomerReviews'}
 
 
 //  gotoDetail() {this._router.navigate(['CustomerReviewDetail', { id: this.selectedCustomerReview.id }]);}

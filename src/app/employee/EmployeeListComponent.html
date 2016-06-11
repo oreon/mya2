@@ -1,11 +1,11 @@
 
-<h4 *ngIf="!embedded">Employees</h4>
+<h4 *ngIf="!embedded">Employee List</h4>
 
-<button *ngIf="!embedded" md-raised-button color="primary" [routerLink]="['/EmployeeDetail',{'id':0}]">Create New</button>
+<button  md-raised-button color="primary" [routerLink]="['/EmployeeDetail',{'id':0}]">New Employee</button>
 {{errorMessage}}
 
 <ul>
-  <li *ngFor="let employee of employees">
+  <li *ngFor="let employee of employeeList">
    
 	
 		{{employee.firstName}}	
@@ -18,9 +18,7 @@
 	
 		{{employee.active}}	
 	
-  <a [routerLink]="['/EmployeeDetail',{'id':employee.id}]">
-    <span class="badge">{{employee.id}}</span> 
-  </a>
+  <button [routerLink]="['/EmployeeDetail',{'id':employee.id}]">Edit {{employee.id}}</button>
   <button *ngIf="!embedded" (click)="delete(employee)">Delete</button>
   <div  *ngIf="embedded">
    

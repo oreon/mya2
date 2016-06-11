@@ -14,10 +14,12 @@ import { CategoryService } from './CategoryService';
 
 
 
-import {Category} from '../common/AppEntities';
-  
-
-
+	import {Category} from '../common/AppEntities';
+	import { EventService} from '../common/EventService'
+	  
+	
+	
+	
 
 
 
@@ -32,24 +34,34 @@ let template = require('./CategoryListComponent.html');
 export class CategoryListComponent extends BaseListComponent<Category> implements OnInit {
 
   @Input()
-  categorys:Category[];
+  categoryList:Category[];
   
   @Input()
   protected embedded:boolean = false
-  
-  selectedCategory:Category;
+   
+  category:Category;
   errorMessage:string;
 
   constructor(
   //  private _router: Router,
   protected _categoryService:CategoryService) { super(_categoryService); }
   
-  setRecords( category:Category[]){this.categorys = category;} 
-  getRecords():Category[]{return this.categorys;}
+  setRecords( category:Category[]){this.categoryList = category;} 
+  getRecords():Category[]{return this.categoryList;}
   
   ngOnInit() { 
   	super.getBaseEntitys()
   }
+  
+  getEmbedded():boolean{ return this.embedded}
+  
+  setRecord( category:Category){this.category = category;} 
+  getRecord():Category{return this.category;}
+   
+  setViewRecord(category:Category){  }
+  
+  createInstance():Category { return <Category>{}; }
+  getSuccessUrl():string { return 'Categorys'}
 
 
 //  gotoDetail() {this._router.navigate(['CategoryDetail', { id: this.selectedCategory.id }]);}

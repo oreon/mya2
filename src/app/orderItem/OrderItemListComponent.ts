@@ -14,16 +14,18 @@ import { OrderItemService } from './OrderItemService';
 
 
 
-import {OrderItem} from '../common/AppEntities';
-  
-
-import {CustomerOrderService} from '../customerOrder/CustomerOrderService'
-import {CustomerOrder} from '../common/AppEntities';
-
-import {ProductService} from '../product/ProductService'
-import {Product} from '../common/AppEntities';
-
-
+	import {OrderItem} from '../common/AppEntities';
+	import { EventService} from '../common/EventService'
+	  
+	
+	import {CustomerOrderService} from '../customerOrder/CustomerOrderService'
+	import {CustomerOrder} from '../common/AppEntities';
+	
+	import {ProductService} from '../product/ProductService'
+	import {Product} from '../common/AppEntities';
+	
+	
+	
 
 
 
@@ -38,24 +40,34 @@ let template = require('./OrderItemListComponent.html');
 export class OrderItemListComponent extends BaseListComponent<OrderItem> implements OnInit {
 
   @Input()
-  orderItems:OrderItem[];
+  orderItemList:OrderItem[];
   
   @Input()
   protected embedded:boolean = false
-  
-  selectedOrderItem:OrderItem;
+   
+  orderItem:OrderItem;
   errorMessage:string;
 
   constructor(
   //  private _router: Router,
   protected _orderItemService:OrderItemService) { super(_orderItemService); }
   
-  setRecords( orderItem:OrderItem[]){this.orderItems = orderItem;} 
-  getRecords():OrderItem[]{return this.orderItems;}
+  setRecords( orderItem:OrderItem[]){this.orderItemList = orderItem;} 
+  getRecords():OrderItem[]{return this.orderItemList;}
   
   ngOnInit() { 
   	super.getBaseEntitys()
   }
+  
+  getEmbedded():boolean{ return this.embedded}
+  
+  setRecord( orderItem:OrderItem){this.orderItem = orderItem;} 
+  getRecord():OrderItem{return this.orderItem;}
+   
+  setViewRecord(orderItem:OrderItem){  }
+  
+  createInstance():OrderItem { return <OrderItem>{}; }
+  getSuccessUrl():string { return 'OrderItems'}
 
 
 //  gotoDetail() {this._router.navigate(['OrderItemDetail', { id: this.selectedOrderItem.id }]);}

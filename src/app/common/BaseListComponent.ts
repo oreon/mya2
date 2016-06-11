@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 
 
 import { BaseEntity } from './BaseEntity';
+import { BaseComponent } from './BaseComponent';
+
+
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
 
 
@@ -10,7 +13,7 @@ import { BaseHttpService } from './BaseHttpService';
 
 
 
-export abstract class BaseListComponent<T extends BaseEntity>{
+export abstract class BaseListComponent<T extends BaseEntity> extends BaseComponent<T>{
   records:T[];
   selectedBaseEntity:T;
   errorMessage:string;
@@ -18,13 +21,17 @@ export abstract class BaseListComponent<T extends BaseEntity>{
   // @Input()
   protected editMode:boolean = false
 
+  protected abstract getEmbedded():boolean
+
+
   constructor(
-  //  private _router: Router,
-  protected _recordService:BaseHttpService<T>) { }
+    protected _recordService:BaseHttpService<T>) { super(); }
 
 
   getBaseEntitys() {
-    if(this.getRecords()) return;    
+    if( this.getEmbedded() === true ||  this.getRecords()) return; 
+    console.log("here")   
+
     this._recordService.getRecords().subscribe(records =>{
        this.records = records;
        this.setRecords(records)

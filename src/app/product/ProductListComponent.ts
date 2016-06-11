@@ -14,10 +14,12 @@ import { ProductService } from './ProductService';
 
 
 
-import {Product} from '../common/AppEntities';
-  
-
-
+	import {Product} from '../common/AppEntities';
+	import { EventService} from '../common/EventService'
+	  
+	
+	
+	
 
 
 
@@ -32,24 +34,34 @@ let template = require('./ProductListComponent.html');
 export class ProductListComponent extends BaseListComponent<Product> implements OnInit {
 
   @Input()
-  products:Product[];
+  productList:Product[];
   
   @Input()
   protected embedded:boolean = false
-  
-  selectedProduct:Product;
+   
+  product:Product;
   errorMessage:string;
 
   constructor(
   //  private _router: Router,
   protected _productService:ProductService) { super(_productService); }
   
-  setRecords( product:Product[]){this.products = product;} 
-  getRecords():Product[]{return this.products;}
+  setRecords( product:Product[]){this.productList = product;} 
+  getRecords():Product[]{return this.productList;}
   
   ngOnInit() { 
   	super.getBaseEntitys()
   }
+  
+  getEmbedded():boolean{ return this.embedded}
+  
+  setRecord( product:Product){this.product = product;} 
+  getRecord():Product{return this.product;}
+   
+  setViewRecord(product:Product){  }
+  
+  createInstance():Product { return <Product>{}; }
+  getSuccessUrl():string { return 'Products'}
 
 
 //  gotoDetail() {this._router.navigate(['ProductDetail', { id: this.selectedProduct.id }]);}

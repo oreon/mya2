@@ -1,11 +1,11 @@
 
-<h4 *ngIf="!embedded">Products</h4>
+<h4 *ngIf="!embedded">Product List</h4>
 
-<button *ngIf="!embedded" md-raised-button color="primary" [routerLink]="['/ProductDetail',{'id':0}]">Create New</button>
+<button  md-raised-button color="primary" [routerLink]="['/ProductDetail',{'id':0}]">New Product</button>
 {{errorMessage}}
 
 <ul>
-  <li *ngFor="let product of products">
+  <li *ngFor="let product of productList">
    
 	
 		{{product.name}}	
@@ -22,9 +22,7 @@
 	
 		{{product.displayTill}}	
 	
-  <a [routerLink]="['/ProductDetail',{'id':product.id}]">
-    <span class="badge">{{product.id}}</span> 
-  </a>
+  <button [routerLink]="['/ProductDetail',{'id':product.id}]">Edit {{product.id}}</button>
   <button *ngIf="!embedded" (click)="delete(product)">Delete</button>
   <div  *ngIf="embedded">
    

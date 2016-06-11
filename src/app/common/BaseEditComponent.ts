@@ -6,6 +6,9 @@ import { SkillService} from '../skill/skill-service';
 
 import { BaseEntity } from './BaseEntity';
 
+import { BaseComponent } from './BaseComponent';
+
+
 import { BaseHttpService } from './BaseHttpService';
 
 import { EventService} from '../common/EventService'
@@ -14,7 +17,7 @@ import { EventService} from '../common/EventService'
 //import { DBService } from '../common/db-service';
 
 
-export abstract class BaseEditComponent<T extends BaseEntity> implements OnInit {
+export abstract class BaseEditComponent<T extends BaseEntity> extends BaseComponent<T> implements OnInit {
   //@Input()
   //protected record: T;
   
@@ -32,11 +35,15 @@ export abstract class BaseEditComponent<T extends BaseEntity> implements OnInit 
   //protected editMode:boolean = false
 
   constructor(
+    protected _eventService:EventService<T>, 
     protected _recordService: BaseHttpService<T>,
     //protected _dbService:DBService,
     protected _routeParams: RouteParams,
     protected _router: Router
-  ) {}
+  ) {
+
+    super();
+  }
 
   getOrCreateEntity(){
     let id = +this._routeParams.get('id');
@@ -60,8 +67,6 @@ export abstract class BaseEditComponent<T extends BaseEntity> implements OnInit 
   abstract setRecord(t:T)
   abstract getRecord():T
 
-  getEventService():EventService<T> { return null; }
-
   ngOnInit() {
     this.getOrCreateEntity()
   }
@@ -74,7 +79,7 @@ export abstract class BaseEditComponent<T extends BaseEntity> implements OnInit 
    this._recordService.save(this.getRecord())
                   .subscribe(
                     record =>{
-                    if(this.getEventService() )  this.getEventService().add(record);
+                      this._eventService.add(record);
                      // this._router.navigate([this.getSuccessUrl()/*, { id: this.selectedEmployee.id }*/]);
                     },
                     error =>  this.errorMessage = <any>error);

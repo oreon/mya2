@@ -1,18 +1,16 @@
 
-<h4 *ngIf="!embedded">Categorys</h4>
+<h4 *ngIf="!embedded">Category List</h4>
 
-<button *ngIf="!embedded" md-raised-button color="primary" [routerLink]="['/CategoryDetail',{'id':0}]">Create New</button>
+<button  md-raised-button color="primary" [routerLink]="['/CategoryDetail',{'id':0}]">New Category</button>
 {{errorMessage}}
 
 <ul>
-  <li *ngFor="let category of categorys">
+  <li *ngFor="let category of categoryList">
    
 	
 		{{category.name}}	
 	
-  <a [routerLink]="['/CategoryDetail',{'id':category.id}]">
-    <span class="badge">{{category.id}}</span> 
-  </a>
+  <button [routerLink]="['/CategoryDetail',{'id':category.id}]">Edit {{category.id}}</button>
   <button *ngIf="!embedded" (click)="delete(category)">Delete</button>
   <div  *ngIf="embedded">
    

@@ -2,18 +2,26 @@
 
 <div *ngIf="customerView && !editMode">
 <md-card>
-  {{customerView.firstName}}  {{customerView.lastName}}
+  <h4>View Customer</h4>
+  
 	
-  <customerOrder-list [embedded]="true" [customerOrders]="customerView.customerOrder"></customerOrder-list>
-  <customerReview-list [embedded]="true" [customerReviews]="customerView.customerReview"></customerReview-list>
+		{{customer.firstName}}	
+	
+
+	
+		{{customer.lastName}}	
+	
+  <h4>Customer Order </h4>
+  <customerOrder-list [embedded]="true" [customerOrderList]="customerView.customerOrder"></customerOrder-list>
+  <h4>Customer Review </h4>
+  <customerReview-list [embedded]="true" [customerReviewList]="customerView.customerReview"></customerReview-list>
    
+  
   <button (click)="goBack()" >Back</button> <button (click)="enableEdit()" >Edit</button>
 </md-card>
 </div>
 
-<div *ngIf="customerView && editMode">
+<div *ngIf="editMode">
 	<customer-edit [customer] = "customer" ></customer-edit>
 </div>
-
- 
 
