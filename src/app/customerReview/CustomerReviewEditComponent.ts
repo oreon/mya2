@@ -59,9 +59,25 @@ export class CustomerReviewEditComponent  extends BaseEditComponent<CustomerRevi
    getRecord():CustomerReview{return this.customerReview;}
    setViewRecord(customerReview:CustomerReview){this.customerReviewView = customerReview;}
    
-  
-  createInstance():CustomerReview { return <CustomerReview>{}; }
-  getSuccessUrl():string { return 'CustomerReviews'}
+   
+ createInstance():CustomerReview { 
+ 	
+    if (this.parent){
+       return <CustomerReview>{customer:<any>this.parent}
+    }
+    
+    return <CustomerReview>{}; 
+  }
+
+  getSuccessUrl():string { 
+  	
+    if (this.parent){
+      return '/CustomerDetail'  
+    }
+    
+    return 'CustomerReviews'
+  }
+
   
   ngOnInit() {
     super.ngOnInit();

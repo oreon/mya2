@@ -1,7 +1,7 @@
 
 <h4 *ngIf="!embedded">OrderItem List</h4>
 
-<button  md-raised-button color="primary" [routerLink]="['/OrderItemDetail',{'id':0}]">New OrderItem</button>
+<button *ngIf="!embedded" md-raised-button color="primary" [routerLink]="['/OrderItemDetail',{'id':0}]">New OrderItem</button>
 {{errorMessage}}
 
 <ul>
@@ -18,7 +18,8 @@
 <a   class="btn btn-default" title="View" href="/product/{{orderItem.product.id}}">{{orderItem.product.displayName}}</a>
 	
 	
-  <button [routerLink]="['/OrderItemDetail',{'id':orderItem.id}]">Edit {{orderItem.id}}</button>
+  <button *ngIf="!embedded" [routerLink]="['/OrderItemDetail',{'id':orderItem.id  ,'parent':parent}]">Edit </button>
+  <button *ngIf="!embedded" [routerLink]="['/OrderItemDetail',{'id':orderItem.id}]">View </button>
   <button *ngIf="!embedded" (click)="delete(orderItem)">Delete</button>
   <div  *ngIf="embedded">
    

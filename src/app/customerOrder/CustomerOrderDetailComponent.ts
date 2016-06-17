@@ -55,9 +55,26 @@ export class CustomerOrderDetailComponent  extends BaseDetailComponent<CustomerO
    getRecord():CustomerOrder{return this.customerOrder;}
    
    setViewRecord(customerOrder:CustomerOrder){  this.customerOrderView = customerOrder;}
-  
-  createInstance():CustomerOrder { return <CustomerOrder>{}; }
-  getSuccessUrl():string { return 'CustomerOrders'}
+   
+   
+ createInstance():CustomerOrder { 
+ 	
+    if (this.parent){
+       return <CustomerOrder>{customer:<any>this.parent}
+    }
+    
+    return <CustomerOrder>{}; 
+  }
+
+  getSuccessUrl():string { 
+  	
+    if (this.parent){
+      return '/CustomerDetail'  
+    }
+    
+    return 'CustomerOrders'
+  }
+
   
   ngOnInit() {
     super.ngOnInit();

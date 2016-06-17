@@ -12,9 +12,13 @@
 		{{customer.lastName}}	
 	
   <h4>Customer Order </h4>
-  <customerOrder-list [embedded]="true" [customerOrderList]="customerView.customerOrder"></customerOrder-list>
+   <button  md-raised-button color="accent" [routerLink]="['/CustomerOrderDetail',{'id':0, 'parent':customerView.id}]">Add Customer</button>
+   
+  <customerOrder-list [embedded]="true"  [parent]="customerView.id" [customerOrderList]="customerView.customerOrder"></customerOrder-list>
   <h4>Customer Review </h4>
-  <customerReview-list [embedded]="true" [customerReviewList]="customerView.customerReview"></customerReview-list>
+   <button  md-raised-button color="accent" [routerLink]="['/CustomerReviewDetail',{'id':0, 'parent':customerView.id}]">Add Customer</button>
+   
+  <customerReview-list [embedded]="true"  [parent]="customerView.id" [customerReviewList]="customerView.customerReview"></customerReview-list>
    
   
   <button (click)="goBack()" >Back</button> <button (click)="enableEdit()" >Edit</button>

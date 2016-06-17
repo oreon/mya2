@@ -21,6 +21,7 @@ export abstract class BaseEditComponent<T extends BaseEntity> extends BaseCompon
   //@Input()
   //protected record: T;
   
+  
  
   @Input()
   protected embedded:boolean = false
@@ -46,9 +47,13 @@ export abstract class BaseEditComponent<T extends BaseEntity> extends BaseCompon
   }
 
   getOrCreateEntity(){
+   
     let id = +this._routeParams.get('id');
     
-    if(this.getRecord()) return;
+
+    console.log('parent : ' + this.parent  +  '  ' + this.getSuccessUrl()) 
+
+    //if(this.getRecord()) return;  //TODO: replae with is embedded ?
 
     if(  !id || id == 0 ){
       this.setRecord(this.createInstance());
@@ -68,7 +73,10 @@ export abstract class BaseEditComponent<T extends BaseEntity> extends BaseCompon
   abstract getRecord():T
 
   ngOnInit() {
-    this.getOrCreateEntity()
+    this.parent = parseInt(this._routeParams.get('parent'));
+
+    if(!this.embedded)
+      this.getOrCreateEntity()
   }
 
   goBack() {
@@ -80,7 +88,8 @@ export abstract class BaseEditComponent<T extends BaseEntity> extends BaseCompon
                   .subscribe(
                     record =>{
                       this._eventService.add(record);
-                     // this._router.navigate([this.getSuccessUrl()/*, { id: this.selectedEmployee.id }*/]);
+                      if(this.parent)
+                        this._router.navigate([this.getSuccessUrl(), { id: this.parent }]);
                     },
                     error =>  this.errorMessage = <any>error);
   }

@@ -60,9 +60,17 @@ export class CustomerEditComponent  extends BaseEditComponent<Customer> implemen
    getRecord():Customer{return this.customer;}
    setViewRecord(customer:Customer){this.customerView = customer;}
    
-  
-  createInstance():Customer { return <Customer>{}; }
-  getSuccessUrl():string { return 'Customers'}
+   
+ createInstance():Customer { 
+ 	
+    return <Customer>{}; 
+  }
+
+  getSuccessUrl():string { 
+  	
+    return 'Customers'
+  }
+
   
   ngOnInit() {
     super.ngOnInit();

@@ -1,7 +1,7 @@
 
 <h4 *ngIf="!embedded">CustomerReview List</h4>
 
-<button  md-raised-button color="primary" [routerLink]="['/CustomerReviewDetail',{'id':0}]">New CustomerReview</button>
+<button *ngIf="!embedded" md-raised-button color="primary" [routerLink]="['/CustomerReviewDetail',{'id':0}]">New CustomerReview</button>
 {{errorMessage}}
 
 <ul>
@@ -18,7 +18,8 @@
 	
 		{{customerReview.rating}}	
 	
-  <button [routerLink]="['/CustomerReviewDetail',{'id':customerReview.id}]">Edit {{customerReview.id}}</button>
+  <button *ngIf="!embedded" [routerLink]="['/CustomerReviewDetail',{'id':customerReview.id  ,'parent':parent}]">Edit </button>
+  <button *ngIf="!embedded" [routerLink]="['/CustomerReviewDetail',{'id':customerReview.id}]">View </button>
   <button *ngIf="!embedded" (click)="delete(customerReview)">Delete</button>
   <div  *ngIf="embedded">
    

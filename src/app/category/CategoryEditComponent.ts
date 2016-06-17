@@ -52,9 +52,17 @@ export class CategoryEditComponent  extends BaseEditComponent<Category> implemen
    getRecord():Category{return this.category;}
    setViewRecord(category:Category){this.categoryView = category;}
    
-  
-  createInstance():Category { return <Category>{}; }
-  getSuccessUrl():string { return 'Categorys'}
+   
+ createInstance():Category { 
+ 	
+    return <Category>{}; 
+  }
+
+  getSuccessUrl():string { 
+  	
+    return 'Categorys'
+  }
+
   
   ngOnInit() {
     super.ngOnInit();

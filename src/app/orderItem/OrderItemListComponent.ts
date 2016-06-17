@@ -34,6 +34,7 @@ let template = require('./OrderItemListComponent.html');
 @Component({
   selector: 'orderItem-list',
   template: template,
+  inputs:['parent', 'embedded'],
   providers:[OrderItemService],
   directives: [OrderItemDetailComponent, ROUTER_DIRECTIVES]
 })
@@ -41,9 +42,6 @@ export class OrderItemListComponent extends BaseListComponent<OrderItem> impleme
 
   @Input()
   orderItemList:OrderItem[];
-  
-  @Input()
-  protected embedded:boolean = false
    
   orderItem:OrderItem;
   errorMessage:string;

@@ -19,9 +19,9 @@ export abstract class BaseListComponent<T extends BaseEntity> extends BaseCompon
   errorMessage:string;
 
   // @Input()
-  protected editMode:boolean = false
+ // protected editMode:boolean = false
 
-  protected abstract getEmbedded():boolean
+  //protected abstract getEmbedded():boolean
 
 
   constructor(
@@ -29,7 +29,7 @@ export abstract class BaseListComponent<T extends BaseEntity> extends BaseCompon
 
 
   getBaseEntitys() {
-    if( this.getEmbedded() === true ||  this.getRecords()) return; 
+    if( this.embedded === true ||  this.getRecords()) return; 
     console.log("here")   
 
     this._recordService.getRecords().subscribe(records =>{

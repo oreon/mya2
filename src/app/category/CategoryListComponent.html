@@ -1,7 +1,7 @@
 
 <h4 *ngIf="!embedded">Category List</h4>
 
-<button  md-raised-button color="primary" [routerLink]="['/CategoryDetail',{'id':0}]">New Category</button>
+<button *ngIf="!embedded" md-raised-button color="primary" [routerLink]="['/CategoryDetail',{'id':0}]">New Category</button>
 {{errorMessage}}
 
 <ul>
@@ -10,7 +10,8 @@
 	
 		{{category.name}}	
 	
-  <button [routerLink]="['/CategoryDetail',{'id':category.id}]">Edit {{category.id}}</button>
+  <button *ngIf="!embedded" [routerLink]="['/CategoryDetail',{'id':category.id }]">Edit </button>
+  <button *ngIf="!embedded" [routerLink]="['/CategoryDetail',{'id':category.id}]">View </button>
   <button *ngIf="!embedded" (click)="delete(category)">Delete</button>
   <div  *ngIf="embedded">
    

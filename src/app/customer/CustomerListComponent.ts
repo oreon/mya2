@@ -36,6 +36,7 @@ let template = require('./CustomerListComponent.html');
 @Component({
   selector: 'customer-list',
   template: template,
+  inputs:['parent', 'embedded'],
   providers:[CustomerService],
   directives: [CustomerOrderListComponent,CustomerReviewListComponent,CustomerDetailComponent, ROUTER_DIRECTIVES]
 })
@@ -43,9 +44,6 @@ export class CustomerListComponent extends BaseListComponent<Customer> implement
 
   @Input()
   customerList:Customer[];
-  
-  @Input()
-  protected embedded:boolean = false
    
   customer:Customer;
   errorMessage:string;

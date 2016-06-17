@@ -54,9 +54,26 @@ export class OrderItemDetailComponent  extends BaseDetailComponent<OrderItem> im
    getRecord():OrderItem{return this.orderItem;}
    
    setViewRecord(orderItem:OrderItem){  this.orderItemView = orderItem;}
-  
-  createInstance():OrderItem { return <OrderItem>{}; }
-  getSuccessUrl():string { return 'OrderItems'}
+   
+   
+ createInstance():OrderItem { 
+ 	
+    if (this.parent){
+       return <OrderItem>{customerOrder:<any>this.parent}
+    }
+    
+    return <OrderItem>{}; 
+  }
+
+  getSuccessUrl():string { 
+  	
+    if (this.parent){
+      return '/CustomerOrderDetail'  
+    }
+    
+    return 'OrderItems'
+  }
+
   
   ngOnInit() {
     super.ngOnInit();

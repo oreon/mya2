@@ -12,7 +12,9 @@
 		{{customerOrder.notes}}	
 	
   <h4>Order Items </h4>
-  <orderItem-list [embedded]="true" [orderItemList]="customerOrderView.orderItems"></orderItem-list>
+   <button  md-raised-button color="accent" [routerLink]="['/OrderItemDetail',{'id':0, 'parent':customerOrderView.id}]">Add CustomerOrder</button>
+   
+  <orderItem-list [embedded]="true"  [parent]="customerOrderView.id" [orderItemList]="customerOrderView.orderItems"></orderItem-list>
    
   
   <button (click)="goBack()" >Back</button> <button (click)="enableEdit()" >Edit</button>

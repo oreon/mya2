@@ -12,12 +12,11 @@ import { BaseComponent } from './BaseComponent';
 
 
 export abstract class BaseDetailComponent<T extends BaseEntity> extends  BaseComponent<T> implements OnInit {
-  //@Input()
-  //protected record: T;
+  
+  
+
   
  
-  @Input()
-  protected embedded:boolean = false
   
   protected errorMessage:String
 
@@ -51,12 +50,24 @@ export abstract class BaseDetailComponent<T extends BaseEntity> extends  BaseCom
       return;
     }
 
+    this.parent = parseInt(this._routeParams.get('parent'))
+
+    if( !isNaN(this.parent ) ){
+      this.editMode = true
+    }
     this.fetchEditRecord(id);
     this.fetchViewRecord(id);  
+    
   }
 
-  fetchEditRecord(id:number){  this._recordService.getById(id).subscribe(record => this.setRecord(record)); } 
-  fetchViewRecord(id:number){ this._recordService.getById(id, true).subscribe(record => this.setViewRecord(record)); } 
+  fetchEditRecord(id:number){  
+    
+    this._recordService.getById(id).subscribe(record => this.setRecord(record)); } 
+    
+  fetchViewRecord(id:number){ 
+    
+    this._recordService.getById(id, true).subscribe(record => this.setViewRecord(record)); 
+  } 
 
 
   ngOnInit() {

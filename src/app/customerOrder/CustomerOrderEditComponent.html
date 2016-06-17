@@ -8,7 +8,7 @@
  
 
   
-   <select  *ngIf="!embedded" required  [ngModel]="customerOrder?.customer" (ngModelChange)="onCustomerChanged($event,i)">
+   <select  *ngIf="!embedded && !parent"  required  [ngModel]="customerOrder?.customer" (ngModelChange)="onCustomerChanged($event,i)">
        <option>Select Customer</option>
        <option *ngFor="let p of customers" [value]="p.id" >{{p.displayName}}</option>
     </select>

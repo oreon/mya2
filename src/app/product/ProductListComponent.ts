@@ -28,6 +28,7 @@ let template = require('./ProductListComponent.html');
 @Component({
   selector: 'product-list',
   template: template,
+  inputs:['parent', 'embedded'],
   providers:[ProductService],
   directives: [ProductDetailComponent, ROUTER_DIRECTIVES]
 })
@@ -35,9 +36,6 @@ export class ProductListComponent extends BaseListComponent<Product> implements 
 
   @Input()
   productList:Product[];
-  
-  @Input()
-  protected embedded:boolean = false
    
   product:Product;
   errorMessage:string;

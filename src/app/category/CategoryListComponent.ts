@@ -28,6 +28,7 @@ let template = require('./CategoryListComponent.html');
 @Component({
   selector: 'category-list',
   template: template,
+  inputs:['parent', 'embedded'],
   providers:[CategoryService],
   directives: [CategoryDetailComponent, ROUTER_DIRECTIVES]
 })
@@ -35,9 +36,6 @@ export class CategoryListComponent extends BaseListComponent<Category> implement
 
   @Input()
   categoryList:Category[];
-  
-  @Input()
-  protected embedded:boolean = false
    
   category:Category;
   errorMessage:string;

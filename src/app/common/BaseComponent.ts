@@ -14,21 +14,29 @@ export abstract class BaseComponent<T extends BaseEntity>  {
   //protected record: T;
   
  
-  @Input()
+  //@Input()
   protected embedded:boolean = false
-  
+
+  //@Input()
+  protected editMode:boolean = false
+
+  //@Input()
+  protected parent:number 
+
+
+    
   protected errorMessage:String
 
   abstract createInstance():T;
-  abstract   getSuccessUrl()
+  abstract   getSuccessUrl();
+ // protected  getEmbedded():boolean{ return false; };
 
-  
-  @Input()
-  protected editMode:boolean = false
 
-   abstract setViewRecord(t:T)
+  abstract setViewRecord(t:T)
   abstract setRecord(t:T)
   abstract getRecord():T
+
   enableEdit(){ this.editMode = true }
+  disableEdit(){ this.editMode = false}
 
 }

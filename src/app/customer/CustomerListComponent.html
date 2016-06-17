@@ -1,7 +1,7 @@
 
 <h4 *ngIf="!embedded">Customer List</h4>
 
-<button  md-raised-button color="primary" [routerLink]="['/CustomerDetail',{'id':0}]">New Customer</button>
+<button *ngIf="!embedded" md-raised-button color="primary" [routerLink]="['/CustomerDetail',{'id':0}]">New Customer</button>
 {{errorMessage}}
 
 <ul>
@@ -14,7 +14,8 @@
 	
 		{{customer.lastName}}	
 	
-  <button [routerLink]="['/CustomerDetail',{'id':customer.id}]">Edit {{customer.id}}</button>
+  <button *ngIf="!embedded" [routerLink]="['/CustomerDetail',{'id':customer.id }]">Edit </button>
+  <button *ngIf="!embedded" [routerLink]="['/CustomerDetail',{'id':customer.id}]">View </button>
   <button *ngIf="!embedded" (click)="delete(customer)">Delete</button>
   <div  *ngIf="embedded">
   <customerOrder-list [embedded]="true" [customerOrderList]="customer.customerOrder"></customerOrder-list>

@@ -52,9 +52,17 @@ export class ProductEditComponent  extends BaseEditComponent<Product> implements
    getRecord():Product{return this.product;}
    setViewRecord(product:Product){this.productView = product;}
    
-  
-  createInstance():Product { return <Product>{}; }
-  getSuccessUrl():string { return 'Products'}
+   
+ createInstance():Product { 
+ 	
+    return <Product>{}; 
+  }
+
+  getSuccessUrl():string { 
+  	
+    return 'Products'
+  }
+
   
   ngOnInit() {
     super.ngOnInit();

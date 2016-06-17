@@ -28,6 +28,7 @@ let template = require('./EmployeeListComponent.html');
 @Component({
   selector: 'employee-list',
   template: template,
+  inputs:['parent', 'embedded'],
   providers:[EmployeeService],
   directives: [EmployeeDetailComponent, ROUTER_DIRECTIVES]
 })
@@ -35,9 +36,6 @@ export class EmployeeListComponent extends BaseListComponent<Employee> implement
 
   @Input()
   employeeList:Employee[];
-  
-  @Input()
-  protected embedded:boolean = false
    
   employee:Employee;
   errorMessage:string;

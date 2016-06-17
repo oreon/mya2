@@ -52,9 +52,17 @@ export class EmployeeEditComponent  extends BaseEditComponent<Employee> implemen
    getRecord():Employee{return this.employee;}
    setViewRecord(employee:Employee){this.employeeView = employee;}
    
-  
-  createInstance():Employee { return <Employee>{}; }
-  getSuccessUrl():string { return 'Employees'}
+   
+ createInstance():Employee { 
+ 	
+    return <Employee>{}; 
+  }
+
+  getSuccessUrl():string { 
+  	
+    return 'Employees'
+  }
+
   
   ngOnInit() {
     super.ngOnInit();
