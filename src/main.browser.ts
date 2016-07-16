@@ -12,7 +12,8 @@ import {provide} from '@angular/core';
 import {DIRECTIVES, PIPES, PROVIDERS} from './platform/browser';
 import {ENV_PROVIDERS} from './platform/environment';
 
-import { AuthConfig, AuthHttp } from 'angular2-jwt';
+import { AuthConfig, AuthHttp, AUTH_PROVIDERS } from 'angular2-jwt';
+
 
 /*
 * App Component
@@ -32,11 +33,13 @@ export function main(initialHmrState?: any): Promise<any> {
     provide(AuthHttp, {
       useFactory: (http) => {
         return new AuthHttp(new AuthConfig({
-          tokenName: 'jwt'
+          tokenName: 'jwt',
+          noJwtError: false 
         }), http);
       },
       deps: [Http]
     }),
+     AUTH_PROVIDERS,
     ...PROVIDERS,
     ...ENV_PROVIDERS,
     ...DIRECTIVES,

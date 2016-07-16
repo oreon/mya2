@@ -30,10 +30,11 @@ export abstract class BaseListComponent<T extends BaseEntity> extends BaseCompon
 
   getBaseEntitys() {
     if( this.embedded === true ||  this.getRecords()) return; 
-    console.log("here")   
+      
 
     this._recordService.getRecords().subscribe(records =>{
        this.records = records;
+       console.log(records);
        this.setRecords(records)
      }
      );

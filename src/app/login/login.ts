@@ -31,6 +31,7 @@ export class Login {
         response => {
           console.log(response.json())
           localStorage.setItem('jwt', response.json()["token"]);
+           localStorage.setItem('id-token', response.json()["token"]);
           this.router.navigateByUrl('/home');
         },
         error => {

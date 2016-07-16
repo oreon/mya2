@@ -52,7 +52,7 @@ export class CustomerListComponent extends BaseListComponent<Customer> implement
   //  private _router: Router,
   protected _customerService:CustomerService) { super(_customerService); }
   
-  setRecords( customer:Customer[]){this.customerList = customer;} 
+  setRecords( customer:Customer[]){console.log(customer); this.customerList = customer;} 
   getRecords():Customer[]{return this.customerList;}
   
   ngOnInit() { 
